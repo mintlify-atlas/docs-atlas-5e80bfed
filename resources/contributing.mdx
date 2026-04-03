@@ -1,0 +1,117 @@
+---
+title: 'Contributing'
+description: 'How to contribute to the awesome-ios list — quality criteria, pull request process, and code of conduct.'
+keywords: ['contributing', 'pull request', 'guidelines', 'open source', 'awesome-ios']
+---
+
+The awesome-ios project welcomes contributions from the iOS community. This guide explains how to add a library, what quality criteria are used for inclusion, and how to submit a pull request.
+
+## How to add a new library
+
+<Steps>
+  <Step title="Search for duplicates">
+    Before submitting, search the existing list to make sure your suggestion hasn't already been added. Duplicate suggestions will be closed.
+  </Step>
+  <Step title="Check eligibility">
+    Verify that the project meets the inclusion criteria described in the quality criteria section below. Projects that fail the basic eligibility check will be declined without review.
+  </Step>
+  <Step title="Format your entry">
+    Use the following format for your entry:
+
+    ```text Entry format
+    [PACKAGE_NAME](LINK) - Brief description ending with a period.
+    ```
+
+    Guidelines for descriptions:
+    - Keep them short, simple, but descriptive
+    - Do not include iOS version or Swift version numbers
+    - Use emojis sparingly — they can cause rendering issues
+    - End all descriptions with a full stop/period
+    - Check spelling and grammar
+  </Step>
+  <Step title="Find the correct position">
+    Insert your entry in **alphabetical order** within the appropriate category. Pull requests that are out of order will be asked to reorder before merging.
+  </Step>
+  <Step title="Submit an individual pull request">
+    Make one pull request per suggestion. Do not bundle multiple new libraries into a single PR — each suggestion should be its own pull request.
+
+    Make sure your text editor is configured to remove trailing whitespace before committing.
+  </Step>
+</Steps>
+
+## Quality criteria for inclusion
+
+### Projects are ineligible if they:
+
+- Have no tests
+- Lack recent commits (stale or abandoned projects)
+- Have fewer than **50 stargazers** on GitHub
+- Have a README or code comments not written in English
+- Have an unclear or missing README
+- Do not support the most common package managers (SPM, CocoaPods, Carthage)
+
+### Projects may be rejected if they:
+
+- Are paid products
+- Have only one contributor
+- Have the exact same functionality as another project already in the list
+- Have very few features or are too minimal in scope
+
+### Projects may be deleted if they:
+
+- No longer build in the current version of Xcode
+- Have received no updates and no longer work
+- Have been officially deprecated
+- Lack a license
+- Have been archived by their maintainer
+
+<Note>
+These criteria exist to maintain the quality and usefulness of the list. The goal is a curated collection of genuinely useful libraries, not a comprehensive directory of everything available.
+</Note>
+
+## How to submit a pull request
+
+<Steps>
+  <Step title="Fork the repository">
+    Fork [vsouza/awesome-ios](https://github.com/vsouza/awesome-ios) on GitHub to your own account.
+  </Step>
+  <Step title="Create a branch">
+    Create a descriptive branch for your change:
+
+    ```bash
+    git checkout -b add-my-library-name
+    ```
+  </Step>
+  <Step title="Make your change">
+    Edit `README.md` to add your library entry in the correct alphabetical position within the appropriate category. Follow the formatting guidelines above.
+  </Step>
+  <Step title="Commit your change">
+    Commit with a clear, descriptive message:
+
+    ```bash
+    git commit -m "Add MyLibraryName to the Networking section"
+    ```
+  </Step>
+  <Step title="Open a pull request">
+    Push your branch and open a pull request against the `master` branch of `vsouza/awesome-ios`. Provide context in the PR description if the library's purpose is not immediately obvious from its name.
+  </Step>
+</Steps>
+
+<Tip>
+Each suggestion should be its own pull request. This makes it easier to review, discuss, and merge individual additions without blocking others.
+</Tip>
+
+## Code of conduct
+
+The awesome-ios project follows a standard open source code of conduct. In summary:
+
+- Be respectful and welcoming to contributors of all backgrounds
+- Focus feedback on the work, not the person
+- Accept constructive criticism gracefully
+- Prioritize what is best for the community
+
+For details, see the [CODE_OF_CONDUCT](https://github.com/vsouza/awesome-ios/blob/master/CODE_OF_CONDUCT.md) file in the repository.
+
+---
+
+Your contributions are always welcome. Thank you for helping make awesome-ios a high-quality resource for the iOS community.

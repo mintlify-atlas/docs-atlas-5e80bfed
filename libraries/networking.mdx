@@ -1,0 +1,451 @@
+---
+title: 'Networking'
+description: 'HTTP clients, REST wrappers, WebSocket, messaging, and server-side Swift libraries for iOS.'
+keywords: ['networking', 'HTTP', 'REST', 'Alamofire', 'Moya', 'WebSocket', 'server', 'Swift']
+---
+
+A curated collection of networking libraries for iOS, covering HTTP clients, REST abstraction layers, WebSocket connections, real-time messaging, and server-side Swift frameworks.
+
+## HTTP & REST networking
+
+The most widely used libraries for making HTTP requests and building REST API clients.
+
+<Tip>Alamofire and Moya are the de-facto standard pairing for networking in Swift apps. Alamofire handles the low-level HTTP layer; Moya builds a type-safe abstraction on top of it.</Tip>
+
+### Getting started with Alamofire
+
+```swift Alamofire basic usage
+import Alamofire
+
+AF.request("https://api.example.com/users").responseDecodable(of: [User].self) { response in
+    switch response.result {
+    case .success(let users):
+        print("Fetched \(users.count) users")
+    case .failure(let error):
+        print("Error: \(error)")
+    }
+}
+```
+
+### Getting started with Moya
+
+```swift Moya target definition
+import Moya
+
+enum UserAPI {
+    case getUser(id: Int)
+    case createUser(name: String)
+}
+
+extension UserAPI: TargetType {
+    var baseURL: URL { URL(string: "https://api.example.com")! }
+
+    var path: String {
+        switch self {
+        case .getUser(let id): return "/users/\(id)"
+        case .createUser: return "/users"
+        }
+    }
+
+    var method: Moya.Method {
+        switch self {
+        case .getUser: return .get
+        case .createUser: return .post
+        }
+    }
+
+    var task: Task { .requestPlain }
+    var headers: [String: String]? { nil }
+}
+
+let provider = MoyaProvider<UserAPI>()
+provider.request(.getUser(id: 1)) { result in
+    switch result {
+    case .success(let response):
+        let user = try? response.map(User.self)
+        print(user as Any)
+    case .failure(let error):
+        print(error)
+    }
+}
+```
+
+### Popular HTTP & REST libraries
+
+<CardGroup cols={2}>
+  <Card
+    title="Alamofire"
+    icon="network-wired"
+    href="https://github.com/Alamofire/Alamofire"
+  >
+    The most popular Swift HTTP networking library. Elegant API built on top of URLSession with response serialization, authentication, and more.
+  </Card>
+  <Card
+    title="Moya"
+    icon="layer-group"
+    href="https://github.com/Moya/Moya"
+  >
+    Network abstraction layer written in Swift. Type-safe, testable network layer built on Alamofire.
+  </Card>
+  <Card
+    title="AFNetworking"
+    icon="plug"
+    href="https://github.com/AFNetworking/AFNetworking"
+  >
+    A delightful iOS and macOS networking framework. The Objective-C predecessor to Alamofire, still widely used.
+  </Card>
+  <Card
+    title="RestKit"
+    icon="arrows-to-circle"
+    href="https://github.com/RestKit/RestKit"
+  >
+    Objective-C framework for iOS that makes interacting with RESTful web services simple, fast and fun.
+  </Card>
+  <Card
+    title="Get"
+    icon="bolt"
+    href="https://github.com/kean/Get"
+  >
+    A modern Swift web API client built using async/await.
+  </Card>
+  <Card
+    title="Just"
+    icon="person-running"
+    href="https://github.com/dduan/Just"
+  >
+    Swift HTTP for Humans. Inspired by the Python requests library.
+  </Card>
+  <Card
+    title="Siesta"
+    icon="tree"
+    href="https://github.com/bustoutsolutions/siesta"
+  >
+    Elegant abstraction for RESTful resources that untangles stateful messes.
+  </Card>
+  <Card
+    title="APIKit"
+    icon="shield-check"
+    href="https://github.com/ishkawa/APIKit"
+  >
+    A networking library for building type-safe web API clients in Swift.
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="More HTTP & REST libraries">
+    <CardGroup cols={2}>
+      <Card title="AlamoRecord" icon="database" href="https://github.com/tunespeak/AlamoRecord">
+        An elegant yet powerful iOS networking layer inspired by ActiveRecord.
+      </Card>
+      <Card title="Bamboots" icon="seedling" href="https://github.com/mmoaay/Bamboots">
+        Network request framework based on Alamofire, making network requests easier for business development.
+      </Card>
+      <Card title="Bridge" icon="bridge-water" href="https://github.com/BridgeNetworking/Bridge">
+        A simple extensible typed networking library. Intercept and process/alter requests and responses easily.
+      </Card>
+      <Card title="Networking" icon="diagram-project" href="https://github.com/3lvis/Networking">
+        Simple HTTP Networking in Swift — a NSURLSession wrapper with image caching support.
+      </Card>
+      <Card title="TRON" icon="rocket" href="https://github.com/MLSDev/TRON">
+        Lightweight network abstraction layer, written on top of Alamofire.
+      </Card>
+      <Card title="Restofire" icon="recycle" href="https://github.com/Restofire/Restofire">
+        Protocol-oriented network abstraction layer in Swift built on top of Alamofire.
+      </Card>
+      <Card title="Swish" icon="comment" href="https://github.com/thoughtbot/Swish">
+        Nothing but Net(working). Simple, composable networking by Thoughtbot.
+      </Card>
+      <Card title="ReactiveAPI" icon="arrows-spin" href="https://github.com/sky-uk/ReactiveAPI">
+        Write clean, concise and declarative network code relying on URLSession, with the power of RxSwift.
+      </Card>
+      <Card title="SPTDataLoader" icon="music" href="https://github.com/spotify/SPTDataLoader">
+        The HTTP library used by the Spotify iOS client.
+      </Card>
+      <Card title="TermiNetwork" icon="terminal" href="https://github.com/billp/TermiNetwork">
+        A networking library written with Swift 4.0 supporting multi-environment configuration, routing and automatic deserialization.
+      </Card>
+      <Card title="Malibu" icon="umbrella-beach" href="https://github.com/hyperoslo/Malibu">
+        Networking library built on promises.
+      </Card>
+      <Card title="YTKNetwork" icon="sitemap" href="https://github.com/yuantiku/YTKNetwork">
+        High-level request utility based on AFNetworking.
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## WebSocket libraries
+
+<Info>WebSocket libraries enable persistent, full-duplex communication between client and server — ideal for chat apps, live feeds, and collaborative tools.</Info>
+
+<CardGroup cols={2}>
+  <Card
+    title="Starscream"
+    icon="star"
+    href="https://github.com/daltoniam/Starscream"
+  >
+    A conforming WebSocket (RFC 6455) library in Swift for iOS and macOS.
+  </Card>
+  <Card
+    title="Socket.IO-Client-Swift"
+    icon="circle-nodes"
+    href="https://github.com/socketio/socket.io-client-swift"
+  >
+    The official Socket.IO client library for Swift. Supports iOS, macOS, tvOS and watchOS.
+  </Card>
+  <Card
+    title="SwiftWebSocket"
+    icon="bolt"
+    href="https://github.com/tidwall/SwiftWebSocket"
+  >
+    High performance WebSocket client library for Swift. Conforms to RFC 6455.
+  </Card>
+  <Card
+    title="RxWebSocket"
+    icon="arrows-spin"
+    href="https://github.com/fjcaetano/RxWebSocket"
+  >
+    Reactive extension over Starscream for WebSockets with RxSwift.
+  </Card>
+  <Card
+    title="Squid"
+    icon="fish"
+    href="https://github.com/borchero/Squid"
+  >
+    Declarative and reactive networking framework based on Combine providing HTTP requests, transparent pagination, and WebSocket communication.
+  </Card>
+  <Card
+    title="SwiftyZeroMQ"
+    icon="code-branch"
+    href="https://github.com/azawawi/SwiftyZeroMQ"
+  >
+    ZeroMQ Swift Bindings for iOS, macOS, tvOS and watchOS.
+  </Card>
+</CardGroup>
+
+### WebSocket quick start (Starscream)
+
+```swift Starscream WebSocket connection
+import Starscream
+
+class ChatService: WebSocketDelegate {
+    var socket: WebSocket!
+
+    init() {
+        var request = URLRequest(url: URL(string: "wss://echo.websocket.org")!)
+        request.timeoutInterval = 5
+        socket = WebSocket(request: request)
+        socket.delegate = self
+        socket.connect()
+    }
+
+    func didReceive(event: WebSocketEvent, client: WebSocketClient) {
+        switch event {
+        case .connected(let headers):
+            print("WebSocket connected: \(headers)")
+            socket.write(string: "Hello!")
+        case .text(let text):
+            print("Received: \(text)")
+        case .disconnected(let reason, let code):
+            print("Disconnected: \(reason) with code: \(code)")
+        case .error(let error):
+            print("Error: \(String(describing: error))")
+        default:
+            break
+        }
+    }
+}
+```
+
+---
+
+## Messaging & real-time
+
+Libraries for building chat interfaces, real-time messaging, and in-app communication features.
+
+<CardGroup cols={2}>
+  <Card
+    title="MessageKit"
+    icon="message"
+    href="https://github.com/MessageKit/MessageKit"
+  >
+    A community-driven Swift re-write of JSQMessagesViewController. Feature-rich, customizable chat UI.
+  </Card>
+  <Card
+    title="Chatto"
+    icon="comments"
+    href="https://github.com/badoo/Chatto"
+  >
+    A lightweight framework to build chat applications, made in Swift. Created by Badoo.
+  </Card>
+  <Card
+    title="ExyteChat"
+    icon="comment-dots"
+    href="https://github.com/exyte/Chat"
+  >
+    SwiftUI Chat UI framework with fully customizable message cells, input view, and a built-in media picker.
+  </Card>
+  <Card
+    title="ChatLayout"
+    icon="table-columns"
+    href="https://github.com/ekazaev/ChatLayout"
+  >
+    A lightweight framework to build chat UI using custom UICollectionViewLayout for full control over the presentation.
+  </Card>
+  <Card
+    title="XMPPFramework"
+    icon="signal"
+    href="https://github.com/robbiehanson/XMPPFramework"
+  >
+    An XMPP Framework in Objective-C for Mac and iOS. Full implementation of the XMPP protocol.
+  </Card>
+  <Card
+    title="Messenger"
+    icon="paper-plane"
+    href="https://github.com/relatedcode/Messenger"
+  >
+    Native iOS Messenger app with realtime chat, audio calls, and full offline support.
+  </Card>
+  <Card
+    title="AsyncMessagesViewController"
+    icon="list-ul"
+    href="https://github.com/nguyenhuy/AsyncMessagesViewController"
+  >
+    A smooth, responsive and flexible messages UI library for iOS.
+  </Card>
+  <Card
+    title="SwiftKafka"
+    icon="server"
+    href="https://github.com/IBM-Swift/SwiftKafka"
+  >
+    Swift SDK for Apache Kafka by IBM. For high-throughput event streaming.
+  </Card>
+  <Card
+    title="SwiftyMessenger"
+    icon="mobile"
+    href="https://github.com/abdullahselek/SwiftyMessenger"
+  >
+    Swift toolkit for passing messages between iOS apps and extensions.
+  </Card>
+  <Card
+    title="chat-sdk-ios"
+    icon="globe"
+    href="https://github.com/chat-sdk/chat-sdk-ios"
+  >
+    Open Source Mobile Messenger with a rich feature set including push notifications and social login.
+  </Card>
+</CardGroup>
+
+---
+
+## Server-side Swift
+
+<Note>Server-side Swift lets you share business logic across your iOS client and backend. Vapor is the most actively maintained framework as of 2024.</Note>
+
+### Vapor quick start
+
+```swift Vapor basic route
+import Vapor
+
+func routes(_ app: Application) throws {
+    app.get("hello") { req async -> String in
+        "Hello, world!"
+    }
+
+    app.get("users", ":userID") { req async throws -> User in
+        guard let id = req.parameters.get("userID", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        guard let user = try await User.find(id, on: req.db) else {
+            throw Abort(.notFound)
+        }
+        return user
+    }
+}
+```
+
+<CardGroup cols={2}>
+  <Card
+    title="Vapor"
+    icon="cloud"
+    href="https://github.com/vapor/vapor"
+  >
+    The most popular Swift web framework. Works on iOS, macOS, and Ubuntu. Supports async/await, Fluent ORM, and Leaf templating.
+  </Card>
+  <Card
+    title="Perfect"
+    icon="circle-check"
+    href="https://github.com/PerfectlySoft/Perfect"
+  >
+    Server-side Swift framework. Includes the Perfect library, application server, connectors and example apps.
+  </Card>
+  <Card
+    title="Kitura"
+    icon="k"
+    href="https://github.com/IBM-Swift/Kitura"
+  >
+    A Swift Web Framework and HTTP Server from IBM. Supports a middleware-based architecture similar to Express.
+  </Card>
+  <Card
+    title="Zewo"
+    icon="z"
+    href="https://github.com/Zewo/Zewo"
+  >
+    Lightweight library for web server applications in Swift on macOS and Linux powered by coroutines.
+  </Card>
+  <Card
+    title="Swifter"
+    icon="server"
+    href="https://github.com/httpswift/swifter"
+  >
+    Tiny HTTP server engine written in Swift. Great for embedding a lightweight server inside an iOS app.
+  </Card>
+  <Card
+    title="Embassy"
+    icon="building-columns"
+    href="https://github.com/envoy/Embassy"
+  >
+    Super lightweight async HTTP server library in pure Swift. Runs on iOS, macOS, and Linux.
+  </Card>
+  <Card
+    title="GCDWebServer"
+    icon="diagram-project"
+    href="https://github.com/swisspol/GCDWebServer"
+  >
+    Lightweight GCD-based HTTP server for macOS and iOS. Includes a web-based file uploader and WebDAV server.
+  </Card>
+  <Card
+    title="smoke-framework"
+    icon="cloud-arrow-up"
+    href="https://github.com/amzn/smoke-framework"
+  >
+    A light-weight server-side service framework written in Swift, from Amazon.
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="More server-side Swift libraries">
+    <CardGroup cols={2}>
+      <Card title="CocoaHTTPServer" icon="globe" href="https://github.com/robbiehanson/CocoaHTTPServer">
+        A small, lightweight, embeddable HTTP server for macOS or iOS applications.
+      </Card>
+      <Card title="Taylor" icon="t" href="https://github.com/izqui/Taylor">
+        A lightweight library for writing HTTP web servers with Swift.
+      </Card>
+      <Card title="Express" icon="e" href="https://github.com/crossroadlabs/Express">
+        Swift Express is a simple, yet unopinionated web application server written in Swift.
+      </Card>
+      <Card title="NetworkObjects" icon="diagram-project" href="https://github.com/colemancda/NetworkObjects">
+        Swift backend/server framework. Pure Swift, supports Linux.
+      </Card>
+      <Card title="Jobs" icon="briefcase" href="https://github.com/BrettRToomey/Jobs">
+        A job system for Swift backends.
+      </Card>
+      <Card title="ApacheExpress" icon="a" href="https://github.com/ApacheExpress/ApacheExpress">
+        Write Apache Modules in Swift!
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,479 @@
+---
+title: 'Database & Cache'
+description: 'Database, ORM, Core Data wrappers, caching, file management, and UserDefaults libraries for iOS.'
+keywords: ['database', 'Realm', 'SQLite', 'Core Data', 'cache', 'persistence', 'UserDefaults', 'files']
+---
+
+A curated collection of libraries for persisting, caching, and managing data in iOS apps — from full-featured databases to lightweight UserDefaults wrappers.
+
+## Database & ORM
+
+Full-featured database engines and object-relational mappers for iOS.
+
+<Tip>Realm is the most developer-friendly option for mobile-first persistence. SQLite.swift and GRDB.swift are excellent choices when you need SQL-level control.</Tip>
+
+### Getting started with Realm
+
+```swift Realm object and write example
+import RealmSwift
+
+class Dog: Object {
+    @Persisted var name: String
+    @Persisted var age: Int
+}
+
+// Write
+let realm = try! Realm()
+let dog = Dog()
+dog.name = "Rex"
+dog.age = 3
+try! realm.write {
+    realm.add(dog)
+}
+
+// Query
+let dogs = realm.objects(Dog.self).filter("age > 1")
+for d in dogs {
+    print("\(d.name) is \(d.age) years old")
+}
+```
+
+### Getting started with SQLite.swift
+
+```swift SQLite.swift table and query
+import SQLite
+
+let db = try Connection("path/to/db.sqlite3")
+
+let users = Table("users")
+let id    = Expression<Int64>("id")
+let name  = Expression<String>("name")
+let email = Expression<String?>("email")
+
+try db.run(users.create { t in
+    t.column(id, primaryKey: true)
+    t.column(name)
+    t.column(email, unique: true)
+})
+
+// Insert
+let insert = users.insert(name <- "Alice", email <- "alice@example.com")
+let rowid  = try db.run(insert)
+
+// Query
+for user in try db.prepare(users) {
+    print("id: \(user[id]), name: \(user[name])")
+}
+```
+
+<CardGroup cols={2}>
+  <Card
+    title="Realm"
+    icon="database"
+    href="https://github.com/realm/realm-cocoa"
+  >
+    The alternative to CoreData and SQLite. Simple, modern and fast. First-class Swift support with property wrappers.
+  </Card>
+  <Card
+    title="SQLite.swift"
+    icon="table"
+    href="https://github.com/stephencelis/SQLite.swift"
+  >
+    A type-safe, Swift-language layer over SQLite3. Expressive and composable SQL queries.
+  </Card>
+  <Card
+    title="GRDB.swift"
+    icon="layer-group"
+    href="https://github.com/groue/GRDB.swift"
+  >
+    A versatile SQLite toolkit for Swift with WAL mode support. Excellent documentation and active community.
+  </Card>
+  <Card
+    title="FMDB"
+    icon="file-code"
+    href="https://github.com/ccgus/fmdb"
+  >
+    A Cocoa / Objective-C wrapper around SQLite. The classic choice for Objective-C projects.
+  </Card>
+  <Card
+    title="ObjectBox"
+    icon="box"
+    href="https://github.com/objectbox/objectbox-swift"
+  >
+    Superfast, light-weight object persistence framework. Designed for edge devices.
+  </Card>
+  <Card
+    title="WCDB"
+    icon="w"
+    href="https://github.com/Tencent/wcdb"
+  >
+    An efficient, complete, easy-to-use mobile database framework for iOS and macOS, from Tencent.
+  </Card>
+  <Card
+    title="YapDatabase"
+    icon="y"
+    href="https://github.com/yapstudios/YapDatabase"
+  >
+    An extensible database for iOS & Mac. Built on SQLite, supports views, secondary indexes, and full-text search.
+  </Card>
+  <Card
+    title="DuckDB"
+    icon="database"
+    href="https://github.com/duckdb/duckdb-swift"
+  >
+    A high-performance analytical database system with a native Swift client.
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="More database libraries">
+    <CardGroup cols={2}>
+      <Card title="MMKV" icon="bolt" href="https://github.com/Tencent/MMKV">
+        An efficient, small mobile key-value storage framework developed by WeChat. Extremely fast reads/writes.
+      </Card>
+      <Card title="FCModel" icon="file" href="https://github.com/marcoarment/FCModel">
+        An alternative to Core Data for people who like having direct SQL access.
+      </Card>
+      <Card title="SugarRecord" icon="leaf" href="https://github.com/modo-studio/SugarRecord">
+        Data persistence management library supporting Core Data and Realm.
+      </Card>
+      <Card title="SwiftStore" icon="s" href="https://github.com/hemantasapkota/SwiftStore">
+        Key-Value store for Swift backed by LevelDB.
+      </Card>
+      <Card title="Fluent" icon="water" href="https://github.com/vapor/fluent">
+        Simple ActiveRecord implementation for working with your database in Swift (part of Vapor).
+      </Card>
+      <Card title="MongoKitten" icon="m" href="https://github.com/OpenKitten/MongoKitten">
+        A pure Swift MongoDB client implementation with support for embedded databases.
+      </Card>
+      <Card title="IceCream" icon="circle" href="https://github.com/caiyue1993/IceCream">
+        Sync Realm Database with CloudKit.
+      </Card>
+      <Card title="QuickDB" icon="zap" href="https://github.com/behrad-kzm/QuickDB">
+        Save and Retrieve any Codable in just one line of code.
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Core Data wrappers
+
+Libraries that simplify working with Apple's Core Data framework.
+
+<Info>Core Data is Apple's built-in object graph and persistence framework. These wrappers reduce boilerplate and add type-safety.</Info>
+
+<CardGroup cols={2}>
+  <Card
+    title="MagicalRecord"
+    icon="hat-wizard"
+    href="https://github.com/magicalpanda/MagicalRecord"
+  >
+    Super Awesome Easy Fetching for Core Data. Inspired by Ruby on Rails' ActiveRecord.
+  </Card>
+  <Card
+    title="CoreStore"
+    icon="store"
+    href="https://github.com/JohnEstropia/CoreStore"
+  >
+    Powerful Core Data framework for incremental migrations, fetching, observing, and more.
+  </Card>
+  <Card
+    title="AlecrimCoreData"
+    icon="a"
+    href="https://github.com/Alecrim/AlecrimCoreData"
+  >
+    A powerful and simple Core Data wrapper framework written in Swift.
+  </Card>
+  <Card
+    title="AERecord"
+    icon="record-vinyl"
+    href="https://github.com/tadija/AERecord"
+  >
+    Super awesome Core Data wrapper in Swift with a clean and expressive API.
+  </Card>
+  <Card
+    title="CoreDataStack"
+    icon="layer-group"
+    href="https://github.com/bignerdranch/CoreDataStack"
+  >
+    The Big Nerd Ranch Core Data Stack. A reliable, battle-tested foundation.
+  </Card>
+  <Card
+    title="Sync"
+    icon="arrows-rotate"
+    href="https://github.com/3lvis/Sync"
+  >
+    Modern Swift JSON synchronization to Core Data. Handles relationships and nested objects.
+  </Card>
+  <Card
+    title="Graph"
+    icon="diagram-project"
+    href="https://github.com/CosmicMind/Graph"
+  >
+    An elegant data-driven framework for CoreData in Swift.
+  </Card>
+  <Card
+    title="JSQCoreDataKit"
+    icon="j"
+    href="https://github.com/jessesquires/JSQCoreDataKit"
+  >
+    A swifter Core Data stack. Lightweight, minimal, and idiomatic Swift.
+  </Card>
+  <Card
+    title="Skopelos"
+    icon="s"
+    href="https://github.com/albertodebortoli/Skopelos"
+  >
+    A minimalistic, thread-safe, non-boilerplate and super easy to use version of Active Record on Core Data.
+  </Card>
+  <Card
+    title="Mogenerator"
+    icon="gear"
+    href="https://github.com/rentzsch/mogenerator"
+  >
+    Automatic Core Data code generation. Generates human and machine files for your managed objects.
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="More Core Data libraries">
+    <CardGroup cols={2}>
+      <Card title="DATAStack" icon="layer-group" href="https://github.com/3lvis/DATAStack">
+        100% Swift simple boilerplate-free Core Data Stack using NSPersistentContainer.
+      </Card>
+      <Card title="PredicateFlow" icon="filter" href="https://github.com/andreadelfante/PredicateFlow">
+        Write amazing, strong-typed and easy-to-read NSPredicates using a fluent builder API.
+      </Card>
+      <Card title="PrediKit" icon="p" href="https://github.com/KrakenDev/PrediKit">
+        An NSPredicate DSL for iOS, macOS, tvOS & watchOS. Inspired by SnapKit.
+      </Card>
+      <Card title="Ensembles" icon="e" href="https://github.com/drewmccormack/ensembles">
+        A synchronization framework for Core Data.
+      </Card>
+      <Card title="CloudCore" icon="cloud" href="https://github.com/deeje/CloudCore">
+        Robust CloudKit synchronization with offline editing, relationships, shared and public databases.
+      </Card>
+      <Card title="Cadmium" icon="c" href="https://github.com/jmfieldman/cadmium">
+        A complete Swift framework that wraps CoreData and helps facilitate best practices.
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Caching libraries
+
+Thread-safe, high-performance caching for images, data, and arbitrary objects.
+
+<CardGroup cols={2}>
+  <Card
+    title="PINCache"
+    icon="thumbtack"
+    href="https://github.com/pinterest/PINCache"
+  >
+    Fast, non-deadlocking parallel object cache for iOS and macOS. Battle-tested in the Pinterest app.
+  </Card>
+  <Card
+    title="Cache"
+    icon="box-archive"
+    href="https://github.com/hyperoslo/Cache"
+  >
+    Nothing but Cache. A type-safe, multi-level cache (memory + disk) in Swift.
+  </Card>
+  <Card
+    title="YYCache"
+    icon="y"
+    href="https://github.com/ibireme/YYCache"
+  >
+    High performance cache framework for iOS. LRU eviction, thread-safe, and extremely fast.
+  </Card>
+  <Card
+    title="SPTPersistentCache"
+    icon="music"
+    href="https://github.com/spotify/SPTPersistentCache"
+  >
+    Spotify's iOS persistent cache. Handles eviction policies, TTLs, and corruption recovery.
+  </Card>
+  <Card
+    title="HanekeSwift"
+    icon="image"
+    href="https://github.com/Haneke/HanekeSwift"
+  >
+    A lightweight generic cache for iOS written in Swift with extra love for images.
+  </Card>
+  <Card
+    title="Disk"
+    icon="hard-drive"
+    href="https://github.com/saoudrizwan/Disk"
+  >
+    Delightful framework for iOS to easily persist structs, images, and data.
+  </Card>
+  <Card
+    title="Awesome Cache"
+    icon="star"
+    href="https://github.com/aschuch/AwesomeCache"
+  >
+    Delightful on-disk cache with per-object expiration dates, written in Swift.
+  </Card>
+  <Card
+    title="Carlos"
+    icon="c"
+    href="https://github.com/spring-media/Carlos"
+  >
+    A simple but flexible cache. Supports composition, transformation and conditional caching.
+  </Card>
+</CardGroup>
+
+---
+
+## File management
+
+Libraries for working with the file system, archives, and cloud storage providers.
+
+<CardGroup cols={2}>
+  <Card
+    title="FileKit"
+    icon="folder-open"
+    href="https://github.com/nvzqz/FileKit"
+  >
+    Simple and expressive file management in Swift. Operator overloading for path construction.
+  </Card>
+  <Card
+    title="Zip"
+    icon="file-zipper"
+    href="https://github.com/marmelroy/Zip"
+  >
+    Swift framework for zipping and unzipping files. Supports progress callbacks.
+  </Card>
+  <Card
+    title="FileBrowser"
+    icon="folder-tree"
+    href="https://github.com/marmelroy/FileBrowser"
+  >
+    Powerful Swift file browser for iOS with search, preview, and sharing.
+  </Card>
+  <Card
+    title="FileProvider"
+    icon="cloud"
+    href="https://github.com/amosavian/FileProvider"
+  >
+    FileManager replacement supporting local, iCloud, and remote files (WebDAV, FTP, Dropbox, OneDrive, SMB2).
+  </Card>
+  <Card
+    title="ZIPFoundation"
+    icon="file-archive"
+    href="https://github.com/weichsel/ZIPFoundation"
+  >
+    Effortless ZIP handling in Swift. Native Foundation types throughout.
+  </Card>
+  <Card
+    title="ZipArchive"
+    icon="file-zipper"
+    href="https://github.com/ZipArchive/ZipArchive"
+  >
+    Simple utility class for zipping and unzipping files on iOS and Mac using minizip.
+  </Card>
+  <Card
+    title="AppFolder"
+    icon="folder"
+    href="https://github.com/dreymonde/AppFolder"
+  >
+    A lightweight framework for designing strongly-typed representations of your app's directory structure.
+  </Card>
+  <Card
+    title="KZFileWatchers"
+    icon="eye"
+    href="https://github.com/krzysztofzablocki/KZFileWatchers"
+  >
+    A micro-framework for observing file changes, both local and remote.
+  </Card>
+</CardGroup>
+
+---
+
+## UserDefaults extensions
+
+Type-safe, ergonomic wrappers around `NSUserDefaults` / `UserDefaults`.
+
+<Note>Apple's `UserDefaults` API is untyped. These libraries add compile-time safety and modern Swift syntax.</Note>
+
+```swift SwiftyUserDefaults example
+import SwiftyUserDefaults
+
+// Define keys with types
+extension DefaultsKeys {
+    var username: DefaultsKey<String?> { .init("username") }
+    var launchCount: DefaultsKey<Int>  { .init("launchCount", defaultValue: 0) }
+    var isPremium: DefaultsKey<Bool>   { .init("isPremium", defaultValue: false) }
+}
+
+// Read
+let name  = Defaults[\.username]
+let count = Defaults[\.launchCount]
+
+// Write
+Defaults[\.username]    = "alice"
+Defaults[\.launchCount] += 1
+```
+
+<CardGroup cols={2}>
+  <Card
+    title="SwiftyUserDefaults"
+    icon="sliders"
+    href="https://github.com/sunshinejr/SwiftyUserDefaults"
+  >
+    Statically-typed NSUserDefaults. Modern, clean API with property wrapper support.
+  </Card>
+  <Card
+    title="Defaults"
+    icon="d"
+    href="https://github.com/sindresorhus/Defaults"
+  >
+    Swifty and modern UserDefaults. Supports Codable, iCloud sync, and observation.
+  </Card>
+  <Card
+    title="Default"
+    icon="gear"
+    href="https://github.com/Nirma/Default"
+  >
+    Modern interface to UserDefaults with Codable support.
+  </Card>
+  <Card
+    title="Zephyr"
+    icon="wind"
+    href="https://github.com/ArtSabintsev/Zephyr"
+  >
+    Effortlessly synchronize NSUserDefaults over iCloud.
+  </Card>
+  <Card
+    title="SecureDefaults"
+    icon="lock"
+    href="https://github.com/vpeschenkov/SecureDefaults"
+  >
+    A lightweight wrapper over UserDefaults with an extra AES-256 encryption layer.
+  </Card>
+  <Card
+    title="UserDefaultsStore"
+    icon="box-archive"
+    href="https://github.com/omaralbeik/UserDefaultsStore"
+  >
+    An easy and very light way to store and retrieve Codable objects in a couple lines of code.
+  </Card>
+  <Card
+    title="Prephirences"
+    icon="sliders"
+    href="https://github.com/phimage/Prephirences"
+  >
+    Swift library that provides useful protocols and convenience methods to manage application preferences.
+  </Card>
+  <Card
+    title="PersistenceKit"
+    icon="database"
+    href="https://github.com/Teknasyon-Teknoloji/PersistenceKit"
+  >
+    Store and retrieve Codable objects to various persistence layers in a couple lines of code.
+  </Card>
+</CardGroup>

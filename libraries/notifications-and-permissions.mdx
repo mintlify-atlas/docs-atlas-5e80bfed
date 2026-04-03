@@ -1,0 +1,245 @@
+---
+title: 'Notifications & permissions'
+description: 'Libraries for push notifications, permission management, OAuth authentication, and App Store utilities on iOS.'
+keywords: ['push notifications', 'apns', 'permissions', 'oauth', 'authentication', 'app store', 'siren', 'onesignal']
+---
+
+This page covers libraries for handling push notifications, managing iOS permission requests, implementing OAuth and authentication flows, and working with App Store version checks and review prompts.
+
+<AccordionGroup>
+
+  <Accordion title="Push notification libraries">
+
+    Libraries for registering devices, sending test notifications, and building in-app notification experiences.
+
+    | Library | Description |
+    |---------|-------------|
+    | [Orbiter](https://github.com/mattt/Orbiter) | Push notification device registration for iOS. Handles APNS token management. |
+    | [NWPusher](https://github.com/noodlewerk/NWPusher) | macOS and iOS application and framework for working with the Apple Push Notification service (APNs) during development. |
+    | [Knuff](https://github.com/KnuffApp/Knuff) | macOS debug application for Apple Push Notification Service (APNS). Send test notifications without a server. |
+    | [SimulatorRemoteNotifications](https://github.com/acoomans/SimulatorRemoteNotifications) | Library to send mock remote notifications to the iOS simulator for testing. |
+    | [PEM](https://github.com/fastlane/fastlane/tree/master/pem) | Fastlane tool to automatically generate and renew push notification profiles and certificates. |
+    | [FBNotifications](https://github.com/facebook/FBNotifications) | Facebook Analytics in-app notifications framework for rich notification templates. |
+    | [APNSUtil](https://github.com/pisces/APNSUtil) | Library that simplifies settings and landing configuration for Apple Push Notification Service. |
+
+  </Accordion>
+
+  <Accordion title="Push notification providers">
+
+    Most push notification providers are paid services; several offer free tiers. The table below summarizes key providers from the Awesome iOS list.
+
+    <CardGroup cols={2}>
+      <Card
+        title="OneSignal"
+        icon="bell"
+        href="https://onesignal.com"
+      >
+        Free push notification service with no message limits. Supports iOS, Android, and web. Includes in-app messaging and analytics.
+      </Card>
+      <Card
+        title="Pusher Beams"
+        icon="bolt"
+        href="https://pusher.com/beams"
+      >
+        Free and unlimited push notifications with a simple API. Good for apps that need reliable delivery with minimal backend setup.
+      </Card>
+      <Card
+        title="Pushwoosh"
+        icon="paper-plane"
+        href="https://www.pushwoosh.com"
+      >
+        Cross-platform push notification service with segmentation, personalization, and A/B testing features.
+      </Card>
+      <Card
+        title="Braze"
+        icon="chart-line"
+        href="https://www.braze.com"
+      >
+        Comprehensive customer engagement platform with push notifications, in-app messages, and lifecycle marketing tools.
+      </Card>
+      <Card
+        title="Urban Airship"
+        icon="city"
+        href="https://www.airship.com/platform/channels/mobile-app/"
+      >
+        Enterprise-grade mobile engagement platform with push, in-app messaging, and deep linking.
+      </Card>
+      <Card
+        title="Batch"
+        icon="layer-group"
+        href="https://batch.com"
+      >
+        Mobile engagement platform offering push notifications, in-app campaigns, and transactional messaging.
+      </Card>
+      <Card
+        title="Pushkin"
+        icon="code"
+        href="https://github.com/Nordeus/pushkin"
+      >
+        Free and open-source push notification server by Nordeus. Self-hosted option for teams that want full control over delivery infrastructure.
+      </Card>
+      <Card
+        title="Catapush"
+        icon="rocket"
+        href="https://www.catapush.com/"
+      >
+        Reliable message delivery platform with read receipts and guaranteed delivery, suitable for transactional and critical notifications.
+      </Card>
+    </CardGroup>
+
+    <Info>
+      Additional providers in the Awesome iOS list include [Growth Push](https://growthpush.com) (popular in Japan), [Boxcar](https://boxcar.io), [Carnival / Sailthru](https://www.sailthru.com), [Netmera](https://www.netmera.com/), [PushBots](https://pushbots.com/), and [Swrve](https://www.swrve.com).
+    </Info>
+
+  </Accordion>
+
+  <Accordion title="Permission management libraries">
+
+    iOS requires explicit user consent for sensitive capabilities. These libraries simplify the process of requesting and checking permission states across all iOS permission types.
+
+    **Overview of iOS permission types and recommended libraries**
+
+    | Permission type | Recommended library |
+    |-----------------|---------------------|
+    | Camera | [SPPermissions](https://github.com/ivanvorobei/SPPermissions), [Proposer](https://github.com/nixzhu/Proposer) |
+    | Photos library | [SPPermissions](https://github.com/ivanvorobei/SPPermissions), [Permission](https://github.com/delba/Permission) |
+    | Microphone | [SPPermissions](https://github.com/ivanvorobei/SPPermissions), [Proposer](https://github.com/nixzhu/Proposer) |
+    | Location (always / in-use) | [STLocationRequest](https://github.com/SvenTiigi/STLocationRequest), [SPPermissions](https://github.com/ivanvorobei/SPPermissions) |
+    | Contacts | [Proposer](https://github.com/nixzhu/Proposer), [ISHPermissionKit](https://github.com/iosphere/ISHPermissionKit) |
+    | Notifications | [SPPermissions](https://github.com/ivanvorobei/SPPermissions), [AREK](https://github.com/ennioma/arek) |
+    | Any permission (pre-prompt) | [ClusterPrePermissions](https://github.com/rsattar/ClusterPrePermissions) |
+
+    **Libraries**
+
+    <Card
+      title="SPPermissions"
+      icon="shield-check"
+      href="https://github.com/ivanvorobei/SPPermissions"
+    >
+      Ask permissions on Swift with a List, Dialog, or Native interface. Supports checking permission state. The most feature-rich option for handling all iOS permission types in a unified UI.
+    </Card>
+
+    <Card
+      title="Permission"
+      icon="lock-open"
+      href="https://github.com/delba/Permission"
+    >
+      A unified API to ask for permissions on iOS. Clean Swift API that handles all permission types with callbacks.
+    </Card>
+
+    <Card
+      title="Proposer"
+      icon="hand"
+      href="https://github.com/nixzhu/Proposer"
+    >
+      Makes permission requests easier for Camera, Photos, Microphone, Contacts, and Location with a single call.
+    </Card>
+
+    <Card
+      title="ISHPermissionKit"
+      icon="list-check"
+      href="https://github.com/iosphere/ISHPermissionKit"
+    >
+      A unified way for iOS apps to request user permissions with a consistent flow across permission types.
+    </Card>
+
+    <Card
+      title="AREK"
+      icon="wrench"
+      href="https://github.com/ennioma/arek"
+    >
+      A clean and easy-to-use wrapper over any kind of iOS permission. Supports custom frequency for permission prompts.
+    </Card>
+
+    <Card
+      title="ClusterPrePermissions"
+      icon="message"
+      href="https://github.com/rsattar/ClusterPrePermissions"
+    >
+      Reusable pre-permissions utility that lets you ask users for access in your own dialog before making the system-level request, reducing denial rates.
+    </Card>
+
+    <Card
+      title="STLocationRequest"
+      icon="location-arrow"
+      href="https://github.com/SvenTiigi/STLocationRequest"
+    >
+      A simple and elegant 3D flyover location request screen written in Swift, designed to provide context before requesting location access.
+    </Card>
+
+    <Card
+      title="PAPermissions"
+      icon="circle-check"
+      href="https://github.com/pascalbros/PAPermissions"
+    >
+      A unified API to ask for permissions on iOS with a customizable UI for displaying required permissions to the user.
+    </Card>
+
+  </Accordion>
+
+  <Accordion title="OAuth & authentication">
+
+    Libraries for OAuth 2.0 flows, social login integrations, and CAPTCHA handling.
+
+    | Library | Description |
+    |---------|-------------|
+    | [OAuthSwift](https://github.com/OAuthSwift/OAuthSwift) | Swift-based OAuth library for iOS supporting both OAuth 1.0 and 2.0. |
+    | [OAuth2](https://github.com/p2/OAuth2) | OAuth2 framework for macOS and iOS written in Swift. Supports authorization code, implicit, and client credentials flows. |
+    | [Heimdallr.swift](https://github.com/trivago/Heimdallr.swift) | Easy-to-use OAuth 2 library for iOS, written in Swift by Trivago. |
+    | [SwiftyOAuth](https://github.com/delba/SwiftyOAuth) | A simple OAuth library for iOS with a built-in set of providers (GitHub, Dribbble, Instagram, etc.). |
+    | [InstagramSimpleOAuth](https://github.com/rbaumbach/InstagramSimpleOAuth) | A quick and simple way to authenticate an Instagram user in your iPhone or iPad app. |
+    | [LinkedInSignIn](https://github.com/serhii-londar/LinkedInSignIn) | Simple view controller to log in and retrieve an access token from LinkedIn. |
+    | [ReCaptcha](https://github.com/fjcaetano/ReCaptcha) | Invisible and visible ReCaptcha integration for iOS. |
+
+    <Tip>
+      For Sign in with Apple (Apple's native authentication), no third-party library is needed — use Apple's `AuthenticationServices` framework directly. For OAuth flows with third-party providers, [OAuthSwift](https://github.com/OAuthSwift/OAuthSwift) covers the widest range of providers.
+    </Tip>
+
+  </Accordion>
+
+  <Accordion title="App Store utilities">
+
+    Libraries for checking app versions, prompting users to update, and requesting App Store reviews.
+
+    <Card
+      title="Siren"
+      icon="tag"
+      href="https://github.com/ArtSabintsev/Siren"
+    >
+      Notify users when a new version of your app is available and prompt them to upgrade. Supports force, option, and skip update modes. Configurable check frequency and alert types.
+    </Card>
+
+    **Usage pattern**
+
+    ```swift Siren version check
+    import Siren
+
+    let siren = Siren.shared
+    siren.rulesManager = RulesManager(globalRules: .annoying)
+    siren.wail { results in
+        switch results {
+        case .success(let updateResults):
+            print("AlertAction ", updateResults.alertAction)
+            print("Localization ", updateResults.localization)
+            print("Model ", updateResults.model)
+            print("UserInterface ", updateResults.userInterface)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+    ```
+
+    **References**
+
+    | Resource | Description |
+    |----------|-------------|
+    | [Apple Review Guidelines](https://developer.apple.com/app-store/review/#common-app-rejections) | Official Apple documentation highlighting the most common reasons apps get rejected. |
+    | [Free App Store Optimization Tool](https://www.mobileaction.co) | Track your App Store visibility for keywords and competitors. |
+
+    <Warning>
+      Apple's `SKStoreReviewController.requestReview()` can only show a review prompt three times per year per user. Always respect this limit and avoid triggering review requests at inappropriate moments in the user journey.
+    </Warning>
+
+  </Accordion>
+
+</AccordionGroup>

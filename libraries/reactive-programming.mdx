@@ -1,0 +1,326 @@
+---
+title: 'Reactive programming'
+description: 'Reactive, functional, and event-driven programming libraries for iOS including RxSwift, Combine, ReactiveSwift, Promises, and functional programming tools.'
+keywords: ['RxSwift', 'Combine', 'ReactiveSwift', 'ReactiveCocoa', 'reactive', 'functional', 'promises', 'futures', 'EventBus', 'iOS']
+---
+
+Reactive programming treats values as streams that change over time, making async code easier to compose, test, and reason about. This page covers the full spectrum — from RxSwift and Combine to functional programming utilities and event buses.
+
+## RxSwift ecosystem
+
+RxSwift is the Swift port of ReactiveX. It provides `Observable` sequences and a large suite of operators for transforming, filtering, and combining async streams.
+
+<CardGroup cols={2}>
+  <Card
+    title="RxSwift"
+    icon="rotate"
+    href="https://github.com/ReactiveX/RxSwift"
+  >
+    Reactive programming in Swift. The core library.
+  </Card>
+  <Card
+    title="RxCocoa"
+    icon="mobile-screen"
+    href="https://github.com/ReactiveX/RxSwift"
+  >
+    UIKit and AppKit bindings for RxSwift. Ships inside the RxSwift repo.
+  </Card>
+  <Card
+    title="RxDataSources"
+    icon="table-list"
+    href="https://github.com/RxSwiftCommunity/RxDataSources"
+  >
+    UITableView and UICollectionView data sources with RxSwift, with animated diffing.
+  </Card>
+  <Card
+    title="RxFlow"
+    icon="diagram-project"
+    href="https://github.com/RxSwiftCommunity/RxFlow"
+  >
+    Navigation framework based on a Reactive Flow Coordinator pattern.
+  </Card>
+</CardGroup>
+
+```swift RxSwift example
+import RxSwift
+import RxCocoa
+
+let disposeBag = DisposeBag()
+
+searchBar.rx.text.orEmpty
+    .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+    .distinctUntilChanged()
+    .flatMapLatest { query in
+        API.search(query: query)
+    }
+    .bind(to: tableView.rx.items(cellIdentifier: "Cell")) { index, result, cell in
+        cell.textLabel?.text = result.title
+    }
+    .disposed(by: disposeBag)
+```
+
+**More RxSwift community libraries**
+
+| Library | Description |
+|---|---|
+| [RxOptional](https://github.com/thanegill/RxOptional) | RxSwift extensions for Swift optionals and occupiable types |
+| [RxAlamofire](https://github.com/RxSwiftCommunity/RxAlamofire) | RxSwift wrapper around Alamofire networking |
+| [RxRealm](https://github.com/RxSwiftCommunity/RxRealm) | Rx wrapper for Realm's collection types |
+| [RxGesture](https://github.com/RxSwiftCommunity/RxGesture) | Reactive wrapper for UIGestureRecognizer |
+| [RxKeyboard](https://github.com/RxSwiftCommunity/RxKeyboard) | Reactive keyboard visibility and frame tracking |
+| [RxPermission](https://github.com/sunshinejr/RxPermission) | RxSwift bindings for the iOS Permissions API |
+| [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx) | Handy extensions on NSObject including `rx.disposeBag` |
+| [RxCoreData](https://github.com/RxSwiftCommunity/RxCoreData) | RxSwift extensions for Core Data |
+| [RxBluetoothKit](https://github.com/Polidea/RxBluetoothKit) | iOS and macOS Bluetooth library for RxSwift |
+| [RxMultipeer](https://github.com/RxSwiftCommunity/RxMultipeer) | Testable RxSwift wrapper around MultipeerConnectivity |
+| [RxAutomaton](https://github.com/inamiy/RxAutomaton) | RxSwift state machine inspired by Redux and Elm |
+| [RxAnimated](https://github.com/RxSwiftCommunity/RxAnimated) | Animated RxCocoa bindings |
+| [RxReduce](https://github.com/RxSwiftCommunity/RxReduce) | Lightweight state container in a reactive way |
+| [STDevRxExt](https://github.com/stdevteam/STDevRxExt) | Extension functions for RxSwift and RxCocoa |
+| [RxCoordinator](https://github.com/quickbirdstudios/XCoordinator) | Powerful navigation library based on the coordinator pattern |
+| [RxWebSocket](https://github.com/fjcaetano/RxWebSocket) | Reactive extension over Starscream for websockets |
+| [RxAlamoRecord](https://github.com/Daltron/RxAlamoRecord) | Combines AlamoRecord and RxSwift for reactive API networking |
+
+---
+
+## Combine extensions
+
+Apple's Combine framework ships with iOS 13+. These libraries extend it with additional operators, open-source ports, and higher-level abstractions.
+
+<CardGroup cols={2}>
+  <Card
+    title="OpenCombine"
+    icon="apple"
+    href="https://github.com/broadwaylamb/OpenCombine"
+  >
+    Open source implementation of Apple's Combine framework for older OS targets and Linux.
+  </Card>
+  <Card
+    title="Verge"
+    icon="layer-group"
+    href="https://github.com/muukii/Verge"
+  >
+    Faster, scalable state management for UIKit and SwiftUI, with Combine support.
+  </Card>
+  <Card
+    title="Spin"
+    icon="rotate"
+    href="https://github.com/Spinners/Spin.Swift"
+  >
+    Universal Feedback Loop implementation supporting RxSwift, ReactiveSwift, and Combine.
+  </Card>
+  <Card
+    title="Clean Architecture for SwiftUI + Combine"
+    icon="diagram-project"
+    href="https://github.com/nalexn/clean-architecture-swiftui"
+  >
+    Production setup of a SwiftUI app with Clean Architecture and Combine.
+  </Card>
+</CardGroup>
+
+---
+
+## ReactiveSwift / ReactiveCocoa
+
+ReactiveSwift and ReactiveCocoa are mature, battle-tested frameworks from the GitHub team. ReactiveSwift provides the core primitives; ReactiveCocoa layers UIKit bindings on top.
+
+<CardGroup cols={2}>
+  <Card
+    title="ReactiveSwift"
+    icon="wave-square"
+    href="https://github.com/ReactiveCocoa/ReactiveSwift"
+  >
+    Streams of values over time. The Swift-only core of the ReactiveCocoa ecosystem.
+  </Card>
+  <Card
+    title="ReactiveCocoa"
+    icon="circle-nodes"
+    href="https://github.com/ReactiveCocoa/ReactiveCocoa"
+  >
+    Cocoa-layer bindings built on top of ReactiveSwift.
+  </Card>
+</CardGroup>
+
+**Supporting libraries**
+
+| Library | Description |
+|---|---|
+| [ReactiveTask](https://github.com/Carthage/ReactiveTask) | Stream-based abstraction for launching processes |
+| [ReactiveCoreData](https://github.com/apparentsoft/ReactiveCoreData) | Core Data integration with ReactiveCocoa |
+| [ReactiveArray](https://github.com/Wolox/ReactiveArray) | Observable array using ReactiveCocoa's Signals |
+| [ACKReactiveExtensions](https://github.com/AckeeCZ/ACKReactiveExtensions) | Useful extensions for ReactiveCocoa |
+| [ReactiveLocation](https://github.com/AckeeCZ/ReactiveLocation) | CoreLocation made reactive |
+| [CwlSignal](https://github.com/mattgallagher/CwlSignal) | Swift framework for reactive programming |
+
+---
+
+## Promises and futures
+
+Promises and Futures are an async abstraction that lets you chain operations and handle errors in a flat, readable style — without callback nesting.
+
+<CardGroup cols={2}>
+  <Card
+    title="PromiseKit"
+    icon="handshake"
+    href="https://github.com/mxcl/PromiseKit"
+  >
+    The most widely used Promises library for iOS and macOS.
+  </Card>
+  <Card
+    title="BrightFutures"
+    icon="sun"
+    href="https://github.com/Thomvis/BrightFutures"
+  >
+    Write great asynchronous code using futures and promises in Swift.
+  </Card>
+  <Card
+    title="Hydra"
+    icon="flask"
+    href="https://github.com/malcommac/Hydra"
+  >
+    Promises and async/await for better async code in Swift.
+  </Card>
+  <Card
+    title="promises"
+    icon="google"
+    href="https://github.com/google/promises"
+  >
+    Google's synchronization construct for Objective-C and Swift async code.
+  </Card>
+</CardGroup>
+
+**More async libraries**
+
+| Library | Description |
+|---|---|
+| [Bolts](https://github.com/BoltsFramework/Bolts-ObjC) | Low-level tasks (promises) and app links for iOS |
+| [Bolts-Swift](https://github.com/BoltsFramework/Bolts-Swift) | Swift port of the Bolts framework |
+| [FutureKit](https://github.com/FutureKit/FutureKit) | Swift-based Future/Promises library for iOS and macOS |
+| [FutureLib](https://github.com/couchdeveloper/FutureLib) | Pure Swift Futures and Promises inspired by Scala |
+| [SwiftTask](https://github.com/ReactKit/SwiftTask) | Promise + progress + pause + cancel + retry for Swift |
+| [then](https://github.com/freshOS/then) | Elegant async code in Swift |
+| [When](https://github.com/vadymmarkov/When) | Lightweight Promises implementation in Swift |
+| [Promis](https://github.com/albertodebortoli/Promis) | Futures and Promises framework in Swift, no magic, no boilerplate |
+| [Bluebird.swift](https://github.com/AndrewBarba/Bluebird.swift) | Promise/A+ implementation in Swift 4, inspired by Bluebird |
+| [Promise](https://github.com/khanlou/Promise) | Promise library for Swift based on the A+ spec |
+| [Futures](https://github.com/formbound/Futures) | Lightweight promises for iOS, macOS, tvOS, watchOS, and server-side Swift |
+| [EasyFutures](https://github.com/DimaMishchenko/EasyFutures) | Swift Futures and Promises, easy to use and highly combinable |
+| [RWPromiseKit](https://github.com/deput/RWPromiseKit) | Light-weight Promise library for Objective-C |
+
+---
+
+## Functional programming
+
+These libraries bring typed functional programming primitives — monads, functors, applicatives, and more — to Swift.
+
+<CardGroup cols={2}>
+  <Card
+    title="Bow"
+    icon="arrow-right-arrow-left"
+    href="https://github.com/bow-swift/bow"
+  >
+    Typed functional programming companion library for Swift. Implements category theory abstractions.
+  </Card>
+  <Card
+    title="Swiftz"
+    icon="function"
+    href="https://github.com/typelift/Swiftz"
+  >
+    Functional programming in Swift. Data types including HList, Either, and more.
+  </Card>
+  <Card
+    title="Swiftx"
+    icon="infinity"
+    href="https://github.com/typelift/Swiftx"
+  >
+    Functional data types and functions for any project.
+  </Card>
+  <Card
+    title="Argo"
+    icon="code"
+    href="https://github.com/thoughtbot/Argo"
+  >
+    Functional JSON parsing library for Swift, using applicative parsing.
+  </Card>
+</CardGroup>
+
+**More functional programming libraries**
+
+| Library | Description |
+|---|---|
+| [Forbind](https://github.com/ulrikdamm/Forbind) | Functional chaining and promises in Swift |
+| [Funky](https://github.com/brynbellomy/Funky) | Functional programming tools and experiments in Swift |
+| [LlamaKit](https://github.com/LlamaKit/LlamaKit) | Collection of must-have functional Swift tools |
+| [Oriole](https://github.com/tptee/Oriole) | Functional utility belt implemented as Swift protocol extensions |
+| [Prelude](https://github.com/robrix/Prelude) | Swift µframework of simple functional programming tools |
+| [OptionalExtensions](https://github.com/RuiAAPeres/OptionalExtensions) | Swift µframework with extensions for the Optional type |
+| [Runes](https://github.com/thoughtbot/Runes) | Infix operators for monadic functions in Swift |
+
+---
+
+## Event buses
+
+Event buses enable publish/subscribe messaging between decoupled components. They are simpler than reactive streams and useful for global notifications.
+
+<CardGroup cols={2}>
+  <Card
+    title="SwiftEventBus"
+    icon="bus"
+    href="https://github.com/cesarferreira/SwiftEventBus"
+  >
+    A publish/subscribe event bus optimized for iOS.
+  </Card>
+  <Card
+    title="SwiftNotificationCenter"
+    icon="bell"
+    href="https://github.com/100mango/SwiftNotificationCenter"
+  >
+    Protocol-oriented NotificationCenter that is type safe, thread safe, and memory safe.
+  </Card>
+  <Card
+    title="NoticeObserveKit"
+    icon="eye"
+    href="https://github.com/marty-suzuki/NoticeObserveKit"
+  >
+    Type-safe NotificationCenter wrapper that associates notice type with info type.
+  </Card>
+  <Card
+    title="Continuum"
+    icon="link"
+    href="https://github.com/marty-suzuki/Continuum"
+  >
+    NotificationCenter-based lightweight UI and AnyObject binder.
+  </Card>
+</CardGroup>
+
+**More event and signal libraries**
+
+| Library | Description |
+|---|---|
+| [TopicEventBus](https://github.com/mcmatan/topicEventBus) | Publish/subscribe with ability to publish events by topic |
+| [signals-ios](https://github.com/uber/signals-ios) | Typeful eventing from Uber |
+| [Snail](https://github.com/UrbanCompass/Snail) | An observables framework for Swift |
+| [Observable](https://github.com/roberthein/Observable) | The easiest way to observe values in Swift |
+| [Hanson](https://github.com/blendle/Hanson) | Lightweight observations and bindings with KVO and NotificationCenter support |
+| [Listenable](https://github.com/msaps/Listenable) | Swift object that provides an observable platform |
+| [LightweightObservable](https://github.com/fxm90/LightweightObservable) | A lightweight observable sequence you can subscribe to |
+| [Bindy](https://github.com/MaximKotliar/Bindy) | Simple, lightweight Swift bindings with KVO support |
+| [BindKit](https://github.com/electricbolt/bindkit) | Two-way data binding framework for iOS |
+
+---
+
+## React-like frameworks
+
+These libraries bring a React or Redux-style component model to UIKit and SwiftUI.
+
+| Library | Description |
+|---|---|
+| [Render](https://github.com/alexdrone/Render) | Swift and UIKit à la React |
+| [Katana](https://github.com/BendingSpoons/katana-swift) | Swift apps à la React and Redux |
+| [TemplateKit](https://github.com/mcudich/TemplateKit) | React-inspired component-based UI framework in Swift |
+| [Tokamak](https://github.com/MaxDesiatov/Tokamak) | React-like declarative API for native UI with one-way data binding |
+| [Interstellar](https://github.com/JensRavens/Interstellar) | Simple and lightweight functional reactive coding in Swift |
+| [Reactor](https://github.com/ReactorSwift/Reactor) | Unidirectional data flow inspired by Elm and Redux |
+| [ReSwift](https://github.com/ReSwift/ReSwift) | Unidirectional data flow in Swift inspired by Redux |
+| [VueFlux](https://github.com/ra1028/VueFlux) | Unidirectional state management architecture inspired by Vuex and Flux |
+| [OneWay](https://github.com/DevYeom/OneWay) | State management with unidirectional data flow |

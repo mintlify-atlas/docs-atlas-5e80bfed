@@ -1,0 +1,191 @@
+---
+title: 'Testing'
+description: 'Libraries for BDD, UI testing, A/B testing, snapshot testing, network mocking, and hot reload on iOS.'
+keywords: ['testing', 'TDD', 'BDD', 'Quick', 'Nimble', 'UI testing', 'snapshot testing', 'network mocking', 'code injection']
+---
+
+iOS has a broad ecosystem of testing tools. This page covers behavior-driven development frameworks, UI automation tools, A/B testing, snapshot testing, network mocking, and code injection for faster iteration.
+
+## BDD frameworks
+
+Behavior-driven development frameworks let you write expressive, human-readable specs.
+
+<CardGroup cols={2}>
+  <Card
+    title="Quick"
+    icon="bolt"
+    href="https://github.com/Quick/Quick"
+  >
+    A behavior-driven development framework for Swift and Objective-C. The most widely used BDD framework on iOS.
+  </Card>
+  <Card
+    title="Nimble"
+    icon="check"
+    href="https://github.com/Quick/Nimble"
+  >
+    A matcher framework for Swift and Objective-C. The standard companion library to Quick.
+  </Card>
+  <Card
+    title="Kiwi"
+    icon="leaf"
+    href="https://github.com/kiwi-bdd/Kiwi"
+  >
+    A behavior-driven development library for iOS development in Objective-C.
+  </Card>
+  <Card
+    title="Specta"
+    icon="list-check"
+    href="https://github.com/specta/specta"
+  >
+    A light-weight TDD/BDD framework for Objective-C and Cocoa.
+  </Card>
+</CardGroup>
+
+Quick and Nimble are almost always used together and represent the standard BDD stack for Swift projects.
+
+```swift Quick + Nimble example
+import Quick
+import Nimble
+
+class DolphinSpec: QuickSpec {
+    override func spec() {
+        describe("a dolphin") {
+            var dolphin: Dolphin!
+            beforeEach {
+                dolphin = Dolphin()
+            }
+            context("when near water") {
+                it("can swim") {
+                    expect(dolphin.canSwim).to(beTrue())
+                }
+                it("has a name") {
+                    expect(dolphin.name).toNot(beEmpty())
+                }
+            }
+        }
+    }
+}
+```
+
+Additional BDD and unit testing tools:
+
+- [SwiftCheck](https://github.com/typelift/SwiftCheck) — QuickCheck for Swift. Property-based testing with automatic counterexample generation.
+- [Sleipnir](https://github.com/railsware/Sleipnir) — BDD-style framework for Swift.
+- [Spry](https://github.com/Quick/Spry) — A Mac and iOS Playgrounds unit testing library based on Nimble.
+- [swift-corelibs-xctest](https://github.com/apple/swift-corelibs-xctest) — The XCTest Project, a Swift core library for unit test support.
+- [PlaygroundTDD](https://github.com/WhiskerzAB/PlaygroundTDD) — Small library to easily run your tests directly within a Playground.
+- [XcodeCoverage](https://github.com/jonreid/XcodeCoverage) — Code coverage for Xcode projects.
+
+---
+
+## UI testing tools
+
+Tools for functional testing, UI automation, and end-to-end test execution.
+
+- [EarlGrey](https://github.com/google/EarlGrey) — iOS UI Automation Test Framework from Google. Enables synchronization with the app's UI thread.
+- [KIF](https://github.com/kif-framework/KIF) — An iOS functional testing framework using accessibility labels to drive interactions.
+- [appium](http://appium.io/) — Open source test automation framework for native, hybrid, and mobile web apps.
+- [Bluepill](https://github.com/linkedin/bluepill) — Reliable iOS testing tool that runs UI tests using multiple simulators on a single machine.
+- [AutoMate](https://github.com/PGSSoft/AutoMate) — XCTest extensions for writing UI automation tests more expressively.
+- [ViewInspector](https://github.com/nalexn/ViewInspector) — Runtime inspection and unit testing of SwiftUI views.
+- [TouchVisualizer](https://github.com/morizotter/TouchVisualizer) — Lightweight touch visualization library in Swift. Visualize your touches with a single line of code.
+- [Remote](https://github.com/johnno1962/Remote) — Control your iPhone from inside Xcode for end-to-end testing.
+- [UITestHelper](https://github.com/evermeer/UITestHelper) — UITest helper library for creating readable and maintainable tests.
+- [LayoutTest-iOS](https://github.com/linkedin/LayoutTest-iOS) — Write unit tests that test the layout of a view in multiple configurations.
+- [Marathon Runner](https://github.com/MarathonLabs/marathon) — Fast, platform-independent test runner focused on performance and stability.
+- [Subliminal](https://github.com/inkling/Subliminal) — An understated approach to iOS integration testing.
+- [Cribble](https://github.com/maxsokolov/Cribble) — Swifty tool for visual testing iPhone and iPad apps.
+
+---
+
+## A/B testing
+
+Frameworks for running experiments and feature flags in your app.
+
+- [Switchboard](https://github.com/KeepSafe/Switchboard) — Easy and lightweight A/B testing for mobile. Minimal server infrastructure required.
+- [SkyLab](https://github.com/mattt/SkyLab) — Multivariate and A/B testing for iOS and Mac.
+- [MSActiveConfig](https://github.com/mindsnacks/MSActiveConfig) — Remote configuration and A/B testing framework for iOS.
+- [ABKit](https://github.com/recruit-mp/ABKit) — A/B testing framework for iOS.
+
+---
+
+## Snapshot testing
+
+Snapshot testing captures a reference rendering of your UI and fails the test when the output changes.
+
+- [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing) — Delightful Swift snapshot testing from Point-Free. Supports views, view controllers, strings, JSON, and more.
+- [iOS Snapshot Test Case](https://github.com/uber/ios-snapshot-test-case) — Snapshot test your UIViews and CALayers on iOS and tvOS. Originally from Facebook.
+- [SnappyTestCase](https://github.com/tooploox/SnappyTestCase) — iOS Simulator type-agnostic snapshot testing built on top of FBSnapshotTestCase.
+- [second_curtain](https://github.com/ashfurrow/second_curtain) — Upload failing iOS snapshot test cases to S3 for review.
+- [Playbook](https://github.com/playbook-ui/playbook-ios) — A library for isolated development of UI components with automatic snapshots.
+- [MirrorDiffKit](https://github.com/Kuniwak/MirrorDiffKit) — Pretty diff between any structs or classes.
+
+---
+
+## Network mocking
+
+Replace live network calls with controlled stubs during testing to make tests fast and deterministic.
+
+- [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) — Stub your network requests easily. Test with fake network data and custom response times, status codes, and headers.
+- [Mockingjay](https://github.com/kylef/Mockingjay) — An elegant library for stubbing HTTP requests with ease in Swift.
+- [DVR](https://github.com/venmo/DVR) — Network testing for Swift. Record and replay network interactions.
+- [Vinyl](https://github.com/Velhotes/Vinyl) — Network testing à la VCR in Swift.
+- [Kakapo](https://github.com/devlucky/Kakapo) — Dynamically mock server behaviors and responses in Swift.
+- [Mockingbird](https://github.com/Farfetch/mockingbird) — Simplify software testing by easily mocking any system using HTTP/HTTPS.
+
+---
+
+## Mocking frameworks
+
+General-purpose mock and stub libraries for unit tests.
+
+- [Cuckoo](https://github.com/Brightify/Cuckoo) — First boilerplate-free mocking framework for Swift.
+- [Mockit](https://github.com/sabirvirtuoso/Mockit) — A simple mocking framework for Swift, inspired by Mockito for Java.
+- [OCMock](https://ocmock.org/) — Mock objects for Objective-C.
+- [Fakery](https://github.com/vadymmarkov/Fakery) — Swift fake data generator for realistic test fixtures.
+- [DataFixture](https://github.com/andreadelfante/DataFixture) — Create data model fixtures easily, with no headache.
+
+---
+
+## Code injection and hot reload
+
+Speed up development cycles by injecting code changes into a running app without recompiling.
+
+<CardGroup cols={2}>
+  <Card
+    title="Inject"
+    icon="bolt-lightning"
+    href="https://github.com/krzysztofzablocki/Inject"
+  >
+    Hot Reloading for Swift applications. Rebuild only the changed file and inject it into your running app.
+  </Card>
+  <Card
+    title="injectionforxcode"
+    icon="syringe"
+    href="https://github.com/johnno1962/injectionforxcode"
+  >
+    Code injection including Swift. The original Xcode injection plugin.
+  </Card>
+  <Card
+    title="Vaccine"
+    icon="shield-virus"
+    href="https://github.com/zenangst/Vaccine"
+  >
+    A framework that aims to make your apps immune to recompile-disease.
+  </Card>
+</CardGroup>
+
+Hot reload tools are for development only and must not be included in production builds.
+
+---
+
+## Other testing utilities
+
+- [NaughtyKeyboard](https://github.com/Palleas/NaughtyKeyboard) — Keyboard populated with the Big List of Naughty Strings to test input validation from a real device.
+- [ETTrace](https://github.com/EmergeTools/ETTrace) — Locally measure app performance without Xcode or Instruments.
+- [XCTestExtensions](https://github.com/shindyu/XCTestExtensions) — Swift extension providing convenient assertions for writing unit tests.
+- [AcceptanceMark](https://github.com/bizz84/AcceptanceMark) — Tool to auto-generate Xcode test classes from Markdown tables.
+- [MetovaTestKit](https://github.com/metova/MetovaTestKit) — Collection of testing utilities to turn crashing test suites into failing ones.
+- [trainer](https://github.com/fastlane-community/trainer) — Convert xcodebuild plist files to JUnit reports.
+- [PinpointKit](https://github.com/Lickability/PinpointKit) — Let testers and users send feedback with annotated screenshots and logs using a simple gesture.
+- [Dixie](https://github.com/Skyscanner/Dixie) — Open source Objective-C testing framework for altering object behaviours.

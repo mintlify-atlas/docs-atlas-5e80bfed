@@ -1,0 +1,123 @@
+---
+title: 'Package managers'
+description: 'A guide to Swift Package Manager, CocoaPods, and Carthage — the three main dependency managers for iOS development.'
+keywords: ['package manager', 'swift package manager', 'cocoapods', 'carthage', 'dependencies', 'spm']
+---
+
+iOS projects use three primary dependency managers. This page covers each one and helps you choose the right tool for your project.
+
+## Swift Package Manager
+
+[Swift Package Manager](https://github.com/apple/swift-package-manager) (SPM) is Apple's official dependency management tool, built into Xcode. It is the recommended choice for new projects.
+
+**Key features:**
+- First-party support from Apple, integrated directly into Xcode
+- No additional tooling required — just Xcode
+- Supports macOS, iOS, watchOS, and tvOS targets
+- Resolves dependencies at build time with a `Package.resolved` lockfile
+- Works seamlessly with Swift and Objective-C packages
+
+**Setup:**
+
+```bash Swift Package Manager
+# In Xcode: File > Add Package Dependencies
+# Or add to Package.swift:
+dependencies: [
+    .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.0.0")),
+]
+```
+
+<Note>
+Swift Package Manager is the preferred approach for new projects. Apple and the Swift community increasingly publish packages as SPM-first.
+</Note>
+
+## CocoaPods
+
+[CocoaPods](https://cocoapods.org/) is the most mature iOS dependency manager with the largest ecosystem of libraries. It has thousands of libraries and can help you scale your projects elegantly.
+
+**Key features:**
+- Massive library of over 90,000 pods
+- Workspace-based integration — generates an Xcode workspace
+- Supports both Swift and Objective-C libraries
+- Plugin system and hooks for customization
+- `Podfile.lock` for deterministic dependency resolution
+
+**Setup:**
+
+```bash CocoaPods setup
+# Install CocoaPods
+sudo gem install cocoapods
+
+# Initialize in your project
+pod init
+
+# Add to your Podfile
+pod 'Alamofire', '~> 5.0'
+pod 'SnapKit', '~> 5.6'
+
+# Install dependencies
+pod install
+```
+
+<Warning>
+After running `pod install`, always open the generated `.xcworkspace` file, not the `.xcodeproj` file.
+</Warning>
+
+### CocoaPods-related tools
+
+- [cocoapods-keys](https://github.com/orta/cocoapods-keys) — A key-value store for storing environment and application keys securely.
+- [Rome](https://github.com/tmspzz/Rome) — A cache tool for Carthage-built frameworks, also useful alongside CocoaPods.
+- [Rugby](https://github.com/swiftyfinch/Rugby) — Cache CocoaPods for faster rebuilds and Xcode project indexing.
+
+## Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a simple, decentralized dependency manager for Cocoa. Unlike CocoaPods, Carthage does not modify your Xcode project — it builds frameworks you link manually.
+
+**Key features:**
+- Decentralized — no central server, uses GitHub/GitLab directly
+- Does not modify your Xcode project files
+- Builds pre-compiled frameworks for faster CI
+- Supports both Swift and Objective-C
+
+**Setup:**
+
+```bash Carthage setup
+# Install via Homebrew
+brew install carthage
+
+# Create Cartfile
+echo 'github "Alamofire/Alamofire" ~> 5.0' > Cartfile
+
+# Build dependencies
+carthage update --use-xcframeworks
+
+# Drag built xcframeworks from Carthage/Build into your Xcode project
+```
+
+### Carthage-related tools
+
+- [Accio](https://github.com/JamitLabs/Accio) — A SwiftPM-based dependency manager for iOS with improvements over Carthage.
+- [Athena](https://github.com/yunarta/works-athena-gradle-plugin) — Gradle plugin to enhance Carthage by uploading archived frameworks into Maven repositories.
+- [punic](https://github.com/schwa/punic) — Clean-room re-implementation of the Carthage tool.
+- [CocoaSeeds](https://github.com/devxoul/CocoaSeeds) — Git Submodule alternative for Cocoa.
+
+## Choosing between them
+
+| Feature | SPM | CocoaPods | Carthage |
+|---|---|---|---|
+| Apple-official | Yes | No | No |
+| Xcode integration | Built-in | Via workspace | Manual |
+| Library ecosystem | Growing | Largest | Large |
+| Build speed | Fast | Slower (source) | Fast (pre-built) |
+| Setup complexity | Minimal | Moderate | Moderate |
+| Modifies Xcode project | No | Yes (workspace) | No |
+| Objective-C support | Yes | Yes | Yes |
+
+<Tip>
+For new projects, start with Swift Package Manager. If you need a library only available on CocoaPods, add CocoaPods alongside SPM. Use Carthage if you prefer not to modify your Xcode project structure and want pre-built binaries.
+</Tip>
+
+### Other tools
+
+- [SWM (Swift Modules)](https://github.com/jankuca/swm) — A package/dependency manager for Swift projects similar to npm, does not require Xcode.
+- [Xcode Maven](http://sap-production.github.io/xcode-maven-plugin/site/) — The Xcode Maven Plugin can run Xcode builds embedded in a Maven lifecycle.

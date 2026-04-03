@@ -1,0 +1,110 @@
+---
+title: 'Code quality'
+description: 'Tools for static analysis, linting, formatting, memory leak detection, and reducing boilerplate in iOS projects.'
+keywords: ['code quality', 'SwiftLint', 'OCLint', 'SwiftFormat', 'linter', 'static analysis', 'memory leak', 'retain cycle']
+---
+
+Maintaining code quality in iOS projects requires a mix of automated tools: linters to catch style violations early, formatters to enforce consistency, and runtime tools to surface memory issues before they reach production.
+
+## Static analysis and linters
+
+<CardGroup cols={2}>
+  <Card
+    title="SwiftLint"
+    icon="shield-check"
+    href="https://github.com/realm/SwiftLint"
+  >
+    The standard tool for enforcing Swift style and conventions. Integrates with Xcode and CI pipelines.
+  </Card>
+  <Card
+    title="OCLint"
+    icon="code"
+    href="https://github.com/oclint/oclint"
+  >
+    Static code analysis tool for improving quality and reducing defects in Objective-C and C/C++ code.
+  </Card>
+  <Card
+    title="Tailor"
+    icon="scissors"
+    href="https://github.com/sleekbyte/tailor"
+  >
+    Cross-platform static analyzer for Swift that helps you write cleaner code and avoid bugs.
+  </Card>
+  <Card
+    title="IBLinter"
+    icon="paintbrush"
+    href="https://github.com/IBDecodable/IBLinter"
+  >
+    A linter tool for Interface Builder. Catches common IB issues at build time.
+  </Card>
+</CardGroup>
+
+SwiftLint is the most widely used code quality tool in the iOS ecosystem. It ships with over 200 rules and integrates into Xcode's build phase to show warnings and errors inline.
+
+```yaml .swiftlint.yml example
+disabled_rules:
+  - colon
+  - comma
+  - control_statement
+opt_in_rules:
+  - empty_count
+  - missing_docs
+excluded:
+  - Carthage
+  - Pods
+line_length: 120
+```
+
+<Tip>
+Run SwiftLint as an Xcode build phase script so violations surface as Xcode warnings. Use `--fix` on the command line to auto-correct fixable violations before committing.
+</Tip>
+
+Additional linting and analysis tools:
+
+- [AnyLint](https://github.com/Flinesoft/AnyLint) — Lint anything by combining the power of Swift and regular expressions. Write custom lint rules in Swift.
+- [spacecommander](https://github.com/square/spacecommander) — Commit fully formatted Objective-C code as a team without even trying. Pre-commit hooks enforce style.
+- [Bootstrap](https://github.com/krzysztofzablocki/Bootstrap) — iOS project bootstrap aimed at high-quality coding practices and sensible defaults.
+
+---
+
+## Code formatting
+
+- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) — A code library and command-line formatting tool for reformatting Swift code. Supports 50+ formatting rules. Run it as a build phase or pre-commit hook.
+
+<Note>
+SwiftFormat and SwiftLint are complementary: SwiftLint identifies style issues, SwiftFormat automatically corrects many of them. Use both for a complete workflow.
+</Note>
+
+---
+
+## Memory and retain cycle detection
+
+These tools catch memory issues at runtime during development, before they become hard-to-reproduce production bugs.
+
+- [FBRetainCycleDetector](https://github.com/facebook/FBRetainCycleDetector) — iOS library from Facebook to help detect retain cycles at runtime.
+- [MLeaksFinder](https://github.com/Tencent/MLeaksFinder) — Find memory leaks in your iOS app at develop time. Automatically detects leaks by checking if view controllers are deallocated after dismissal.
+- [HeapInspector-for-iOS](https://github.com/tapwork/HeapInspector-for-iOS) — Find memory issues and leaks in your iOS app without Instruments.
+- [WeakableSelf](https://github.com/vincent-pradeilles/weakable-self) — A Swift micro-framework to encapsulate `[weak self]` and `guard` statements within closures.
+
+---
+
+## Assertion libraries
+
+- [KZAsserts](https://github.com/krzysztofzablocki/KZAsserts) — Asserts on steroids. Test all your assumptions with ease, with automatic error reporting.
+- [SwiftCop](https://github.com/andresinaka/SwiftCop) — SwiftCop is a validation library written in Swift, inspired by the clarity of Ruby on Rails Active Record validations.
+
+---
+
+## Bug reporting and quality tooling
+
+These tools focus on capturing and communicating quality issues during development and QA.
+
+- [Aardvark](https://github.com/square/Aardvark) — Library that makes it dead simple to create actionable bug reports with a shake gesture.
+- [Bugsee](https://www.bugsee.com) — In-app bug and crash reporting with video, logs, network traffic, and traces.
+- [PSTModernizer](https://github.com/PSPDFKit-labs/PSTModernizer) — Makes it easier to support older iOS versions by fixing things and adding missing methods.
+
+---
+
+## Boilerplate reduction
+
+- [PropertyMapper](https://github.com/krzysztofzablocki/PropertyMapper) — Data mapping and validation with minimal amount of code.

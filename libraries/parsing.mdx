@@ -1,0 +1,169 @@
+---
+title: "Parsing"
+description: "Libraries for parsing JSON, XML, CSV, and other data formats, plus data structures, algorithms, and date/time utilities."
+---
+
+Swift's `Codable` handles most JSON parsing, but these libraries fill gaps for complex scenarios, legacy formats, and richer type-safe querying.
+
+## JSON parsing
+
+<CardGroup cols={2}>
+  <Card title="SwiftyJSON" icon="brackets-curly" href="https://github.com/SwiftyJSON/SwiftyJSON">
+    The easiest way to deal with JSON data in Swift — subscript syntax with type inference
+  </Card>
+  <Card title="Argo" icon="arrow-right-arrow-left" href="https://github.com/thoughtbot/Argo">
+    Functional JSON parsing library for Swift — inspired by Haskell's Aeson
+  </Card>
+  <Card title="ObjectMapper" icon="map" href="https://github.com/tristanhimmelman/ObjectMapper">
+    A framework for mapping model objects to and from JSON
+  </Card>
+  <Card title="Gloss" icon="layer-group" href="https://github.com/hkellaway/Gloss">
+    A shiny JSON parsing library in Swift
+  </Card>
+</CardGroup>
+
+```swift SwiftyJSON
+import SwiftyJSON
+
+let json = try JSON(data: responseData)
+let name = json["user"]["name"].stringValue
+let age = json["user"]["age"].intValue
+let friends = json["user"]["friends"].arrayValue.map { $0["name"].stringValue }
+```
+
+```swift Codable (built-in)
+struct User: Codable {
+    let id: Int
+    let name: String
+    let email: String
+}
+
+let user = try JSONDecoder().decode(User.self, from: data)
+```
+
+<AccordionGroup>
+  <Accordion title="All JSON libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) | Easiest way to deal with JSON in Swift |
+    | [Argo](https://github.com/thoughtbot/Argo) | Functional JSON parsing |
+    | [ObjectMapper](https://github.com/tristanhimmelman/ObjectMapper) | Map model objects to/from JSON |
+    | [Gloss](https://github.com/hkellaway/Gloss) | Shiny JSON parsing library |
+    | [Unbox](https://github.com/JohnSundell/Unbox) | Easy-to-use Swift JSON decoder |
+    | [Freddy](https://github.com/bignerdranch/Freddy) | Reusable JSON parsing library from Big Nerd Ranch |
+    | [mapper](https://github.com/lyft/mapper) | Another JSON deserialization library for Swift |
+    | [JASON](https://github.com/delba/JASON) | JSON parsing with outstanding performances |
+    | [Genome](https://github.com/LoganWright/Genome) | Simple, type-safe, failure-driven mapping |
+    | [JSONNeverDie](https://github.com/johnlui/JSONNeverDie) | Auto reflection tool from JSON to models |
+    | [Decodable](https://github.com/Anviking/Decodable) | Swift 2/3 JSON parsing done right |
+    | [HandyJSON](https://github.com/alibaba/HandyJSON) | Handy Swift JSON-object serialization by Alibaba |
+    | [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper) | Alamofire extension for ObjectMapper |
+    | [EVReflection](https://github.com/evermeer/EVReflection) | Swift helper to serialize/deserialize using reflection |
+  </Accordion>
+</AccordionGroup>
+
+## XML & HTML parsing
+
+<AccordionGroup>
+  <Accordion title="XML and HTML libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [AEXML](https://github.com/tadija/AEXML) | Simple and lightweight XML parser written in Swift |
+    | [SWXMLHash](https://github.com/drmohundro/SWXMLHash) | Lightweight XML parsing in Swift |
+    | [XMLDictionary](https://github.com/nicklockwood/XMLDictionary) | Simple XML parsing using NSDictionary |
+    | [Fuzi](https://github.com/cezheng/Fuzi) | Fast and lightweight XML/HTML parser in Swift with XPath and CSS support |
+    | [Kanna](https://github.com/tid-kijyun/Kanna) | XML/HTML parser that supports XPath |
+    | [WKZombie](https://github.com/mkoehnke/WKZombie) | Headless browser for iOS using WebKit |
+    | [hpple](https://github.com/topfunky/hpple) | XML/HTML parser for iOS using Hpricot-inspired syntax |
+    | [HTMLReader](https://github.com/nolanw/HTMLReader) | HTML5 parser with CSS selectors |
+    | [Ji](https://github.com/honghaoz/Ji) | XML/HTML parser for Swift |
+  </Accordion>
+</AccordionGroup>
+
+## CSV parsing
+
+<AccordionGroup>
+  <Accordion title="CSV libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [CSwiftV](https://github.com/Daniel1of1/CSwiftV) | CSV parser written in Swift following RFC 4180 |
+    | [SwiftCSV](https://github.com/swiftcsv/SwiftCSV) | CSV parser for Swift |
+  </Accordion>
+</AccordionGroup>
+
+## Date & Time
+
+<CardGroup cols={2}>
+  <Card title="SwiftDate" icon="calendar" href="https://github.com/malcommac/SwiftDate">
+    The best way to manage dates and timezones in Swift — a comprehensive toolkit
+  </Card>
+  <Card title="DateTools" icon="clock" href="https://github.com/MatthewYork/DateTools">
+    Dates and times made easy in Objective-C — time ago, date ranges, and more
+  </Card>
+  <Card title="Chronology" icon="hourglass" href="https://github.com/davedelong/Chronology">
+    Building a better date/time library — type-safe calendar and time operations
+  </Card>
+  <Card title="Schedule" icon="calendar-check" href="https://github.com/luoxiu/Schedule">
+    A lightweight task scheduler for Swift with incredibly human-friendly syntax
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="All date & time libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [SwiftDate](https://github.com/malcommac/SwiftDate) | Comprehensive date/timezone toolkit |
+    | [DateTools](https://github.com/MatthewYork/DateTools) | Dates made easy in Objective-C |
+    | [Chronology](https://github.com/davedelong/Chronology) | Type-safe calendar operations |
+    | [Schedule](https://github.com/luoxiu/Schedule) | Human-friendly task scheduling |
+    | [SwiftMoment](https://github.com/akosma/SwiftMoment) | Time and calendar manipulation (Moment.js-inspired) |
+    | [SwiftyTimer](https://github.com/radex/SwiftyTimer) | Swifty API for NSTimer |
+    | [Timepiece](https://github.com/naoty/Timepiece) | Intuitive NSDate extensions in Swift |
+    | [DateHelper](https://github.com/melvitax/DateHelper) | Convenience extension for NSDate |
+    | [Kronos](https://github.com/lyft/Kronos) | Elegant NTP date library in Swift |
+    | [TrueTime](https://github.com/instacart/TrueTime.swift) | Get the true current time, immune to device clock changes |
+    | [AnyDate](https://github.com/Kawoou/AnyDate) | Swifty Date & Time API inspired by Java 8 |
+    | [Solar](https://github.com/ceeK/Solar) | Sunrise and sunset time generator |
+    | [Time](https://github.com/dreymonde/Time) | Type-safe time calculations powered by generics |
+    | [NVDate](https://github.com/novalagung/nvdate) | Swift 4 Date extension library |
+  </Accordion>
+</AccordionGroup>
+
+## Data structures & algorithms
+
+<AccordionGroup>
+  <Accordion title="Data structure libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [swift-algorithm-club](https://github.com/raywenderlich/swift-algorithm-club) | Algorithms and data structures in Swift with explanations |
+    | [SwiftGraph](https://github.com/davecom/SwiftGraph) | Graph data structure and utility functions in pure Swift |
+    | [SwiftPriorityQueue](https://github.com/davecom/SwiftPriorityQueue) | Priority queue with binary heap in pure Swift |
+    | [BTree](https://github.com/attaswift/BTree) | Fast ordered collections using in-memory B-trees |
+    | [Algorithm](https://github.com/CosmicMind/Algorithm) | Data structures empowered by probability toolset |
+    | [Dollar](https://github.com/ankurp/Dollar) | Functional tool-belt like Lo-Dash for Swift |
+    | [DeepDiff](https://github.com/onmyway133/DeepDiff) | Fast collection diffing in Swift |
+    | [DifferenceKit](https://github.com/ra1028/DifferenceKit) | Fast O(n) difference algorithm for Swift collections |
+    | [Differ](https://github.com/tonyarnold/Differ) | Generate differences and patches between collections |
+    | [EKAlgorithms](https://github.com/EvgenyKarkan/EKAlgorithms) | Well-known CS algorithms in Objective-C |
+    | [KeyPathKit](https://github.com/vincent-pradeilles/KeyPathKit) | Seamless data manipulation using typed keypaths |
+    | [Probably](https://github.com/harlanhaskins/Probably) | Swift probability and statistics library |
+  </Accordion>
+</AccordionGroup>
+
+## Math
+
+<AccordionGroup>
+  <Accordion title="Math libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [Surge](https://github.com/mattt/Surge) | High-performance matrix math and DSP using Accelerate |
+    | [BigInt](https://github.com/attaswift/BigInt) | Arbitrary-precision arithmetic in pure Swift |
+    | [SwiftMath](https://github.com/madbat/SwiftMath) | Vectors, matrices, complex numbers, quaternions |
+    | [Euler](https://github.com/mattt/Euler) | Custom operators for mathematical notation in Swift |
+    | [iosMath](https://github.com/kostub/iosMath) | Render beautifully typeset LaTeX math equations |
+    | [SigmaSwiftStatistics](https://github.com/evgenyneu/SigmaSwiftStatistics) | Functions for statistical calculation |
+    | [VectorMath](https://github.com/nicklockwood/VectorMath) | 2D and 3D vector and matrix functions |
+    | [Expression](https://github.com/nicklockwood/Expression) | Evaluate numeric expressions at runtime |
+    | [Matft](https://github.com/jjjkkkjjj/Matft) | Numpy-like n-dimensional array handling in Swift |
+  </Accordion>
+</AccordionGroup>

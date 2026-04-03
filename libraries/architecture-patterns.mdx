@@ -1,0 +1,250 @@
+---
+title: 'Architecture patterns'
+description: 'iOS architecture pattern libraries covering MVC, MVVM, VIPER, TCA, RIBs, and app routing and navigation.'
+keywords: ['architecture', 'MVVM', 'VIPER', 'TCA', 'MVC', 'RIBs', 'routing', 'navigation', 'iOS']
+---
+
+Choosing the right architecture for your iOS app shapes how your code scales, how your team collaborates, and how easily you can test it. The libraries below cover the most popular patterns along with routing solutions that work across all of them.
+
+## Pattern selection guide
+
+<Note>
+  - **MVC**: Simple apps, small teams. Apple's default pattern — familiar but can lead to Massive View Controllers.
+  - **MVVM**: Most iOS apps. Works well with SwiftUI and Combine. Clear separation of view and business logic.
+  - **VIPER**: Large teams with strict separation of concerns. Higher initial overhead, excellent long-term maintainability.
+  - **TCA**: Functional apps that require strong testability and predictable state. Opinionated but powerful.
+  - **RIBs**: Complex apps with deeply nested features. Uber's production-proven architecture.
+</Note>
+
+## Patterns
+
+<Tabs>
+  <Tab title="MVC / Clean Architecture">
+
+    ### MVC and clean architecture
+
+    Model-View-Controller is UIKit's built-in pattern. Clean Architecture layers your app into independent rings (entities, use cases, interface adapters, frameworks) to keep business logic portable and testable.
+
+    <CardGroup cols={2}>
+      <Card
+        title="Clean Architecture for SwiftUI + Combine"
+        icon="layer-group"
+        href="https://github.com/nalexn/clean-architecture-swiftui"
+      >
+        Production-ready demo showcasing Clean Architecture with SwiftUI and Combine.
+      </Card>
+      <Card
+        title="CleanArchitectureRxSwift"
+        icon="diagram-project"
+        href="https://github.com/sergdort/CleanArchitectureRxSwift"
+      >
+        Example of Clean Architecture on iOS using RxSwift.
+      </Card>
+      <Card
+        title="ios-architecture"
+        icon="building-columns"
+        href="https://github.com/tailec/ios-architecture"
+      >
+        A collection comparing MVC, MVVM, MVVM+RxSwift, VIPER, RIBs, and more.
+      </Card>
+      <Card
+        title="Tempura"
+        icon="bolt"
+        href="https://github.com/BendingSpoons/tempura-swift"
+      >
+        Holistic iOS development approach inspired by Redux and MVVM.
+      </Card>
+    </CardGroup>
+
+  </Tab>
+  <Tab title="MVVM">
+
+    ### MVVM (Model-View-ViewModel)
+
+    MVVM separates the presentation layer from business logic through a ViewModel that exposes data via bindings. It pairs naturally with Combine and RxSwift, and is the recommended pattern for SwiftUI apps.
+
+    <CardGroup cols={2}>
+      <Card
+        title="Reactant"
+        icon="atom"
+        href="https://github.com/Brightify/Reactant"
+      >
+        Reactive architecture for iOS built around MVVM concepts.
+      </Card>
+      <Card
+        title="Spin"
+        icon="rotate"
+        href="https://github.com/Spinners/Spin.Swift"
+      >
+        Universal Feedback Loop for RxSwift, ReactiveSwift, and Combine.
+      </Card>
+    </CardGroup>
+
+    **Recommended references**
+
+    - [ios-architecture](https://github.com/tailec/ios-architecture) — compare MVVM side-by-side with other patterns.
+    - [Clean Architecture for SwiftUI + Combine](https://github.com/nalexn/clean-architecture-swiftui) — MVVM meets Clean Architecture in a SwiftUI context.
+
+  </Tab>
+  <Tab title="VIPER">
+
+    ### VIPER
+
+    VIPER (View, Interactor, Presenter, Entity, Router) enforces a strict single-responsibility split across five layers. It shines in large codebases where many engineers work on the same feature area without stepping on each other.
+
+    <CardGroup cols={2}>
+      <Card
+        title="Viperit"
+        icon="puzzle-piece"
+        href="https://github.com/ferranabello/Viperit"
+      >
+        A VIPER framework for iOS, written and tested in Swift.
+      </Card>
+      <Card
+        title="SwiftyVIPER"
+        icon="cubes"
+        href="https://github.com/codytwinton/SwiftyVIPER"
+      >
+        Makes implementing VIPER architecture easier and cleaner.
+      </Card>
+      <Card
+        title="iOS-Viper-Architecture"
+        icon="code-branch"
+        href="https://github.com/MindorksOpenSource/iOS-Viper-Architecture"
+      >
+        Detailed sample app implementing VIPER with Alamofire, CoreData, and PKHUD.
+      </Card>
+      <Card
+        title="VIPER Module Generator"
+        icon="wand-magic-sparkles"
+        href="https://github.com/Kaakati/VIPER-Module-Generator"
+      >
+        Clean VIPER module generator with comments and predefined functions.
+      </Card>
+    </CardGroup>
+
+    **VIPER-friendly routing**
+
+    - [LiteRoute](https://github.com/SpectralDragon/LiteRoute) — easy transitions between VIPER modules in pure Swift.
+
+  </Tab>
+  <Tab title="TCA">
+
+    ### The Composable Architecture (TCA)
+
+    TCA, by Point-Free, models your app as a composition of reducers operating on a single state tree. Side effects are explicit and managed through `Effect`. The pattern makes testing straightforward because you drive reducers directly in tests without any UI.
+
+    <CardGroup cols={2}>
+      <Card
+        title="The Composable Architecture"
+        icon="cubes-stacked"
+        href="https://github.com/pointfreeco/swift-composable-architecture"
+      >
+        A library for building applications in a consistent, understandable way with composition, testing, and ergonomics in mind.
+      </Card>
+      <Card
+        title="Composable Navigator"
+        icon="route"
+        href="https://github.com/Bahn-X/swift-composable-navigator"
+      >
+        Deep-linkable SwiftUI navigation built with TCA composition in mind.
+      </Card>
+    </CardGroup>
+
+    <Tip>
+      TCA works best when you want a single source of truth across your entire app. The learning curve is steeper than MVVM, but the debugging and testing story is exceptional.
+    </Tip>
+
+  </Tab>
+  <Tab title="RIBs / Other patterns">
+
+    ### RIBs and other patterns
+
+    RIBs (Router, Interactor, Builder, Presenter, View) is Uber's open-source architecture for large-scale mobile apps. Each RIB is an independently testable unit with its own lifecycle.
+
+    **RIBs reference**
+
+    - [ios-architecture](https://github.com/tailec/ios-architecture) — includes a side-by-side RIBs example.
+
+    ---
+
+    **Other notable patterns**
+
+    | Library | Pattern | Notes |
+    |---|---|---|
+    | [ReSwift](https://github.com/ReSwift/ReSwift) | Redux | Unidirectional data flow in Swift inspired by Redux |
+    | [Spin](https://github.com/Spinners/Spin.Swift) | Feedback Loop | Works with RxSwift, ReactiveSwift, and Combine |
+    | [VueFlux](https://github.com/ra1028/VueFlux) | Flux/Vuex | Unidirectional state management inspired by Vuex |
+    | [Reactor](https://github.com/ReactorSwift/Reactor) | Elm/Redux | Unidirectional data flow using idiomatic Swift |
+    | [OneWay](https://github.com/DevYeom/OneWay) | Unidirectional | State management with unidirectional data flow |
+    | [Verge](https://github.com/muukii/Verge) | State management | Faster, scalable state management for UIKit and SwiftUI |
+
+  </Tab>
+  <Tab title="App Routing & Navigation">
+
+    ### App routing and navigation
+
+    A routing layer handles URL schemes, deep links, and view-controller transitions independently of your app's business logic. These libraries range from lightweight URL matchers to full coordinator-pattern frameworks.
+
+    <CardGroup cols={2}>
+      <Card
+        title="JLRoutes"
+        icon="link"
+        href="https://github.com/joeldev/JLRoutes"
+      >
+        URL routing library for iOS with a simple block-based API.
+      </Card>
+      <Card
+        title="URLNavigator"
+        icon="compass"
+        href="https://github.com/devxoul/URLNavigator"
+      >
+        Elegant URL routing for Swift.
+      </Card>
+      <Card
+        title="RouteComposer"
+        icon="map"
+        href="https://github.com/ekazaev/route-composer"
+      >
+        Handles view-controller composition, routing, and deep linking tasks.
+      </Card>
+      <Card
+        title="RxFlow"
+        icon="diagram-project"
+        href="https://github.com/RxSwiftCommunity/RxFlow"
+      >
+        Navigation framework based on a Reactive Flow Coordinator pattern.
+      </Card>
+      <Card
+        title="Crossroad"
+        icon="road"
+        href="https://github.com/giginet/Crossroad"
+      >
+        URL router focused on custom URL schemes with argument and parameter parsing.
+      </Card>
+      <Card
+        title="ZIKRouter"
+        icon="shield-halved"
+        href="https://github.com/Zuikyo/ZIKRouter"
+      >
+        Interface-oriented router for discovering modules and injecting dependencies with protocol in OC and Swift.
+      </Card>
+    </CardGroup>
+
+    **More routing libraries**
+
+    | Library | Description |
+    |---|---|
+    | [ApplicationCoordinator](https://github.com/AndreyPanov/ApplicationCoordinator) | Coordinator pattern for managing navigation flow |
+    | [Appz](https://github.com/SwiftKitz/Appz) | Launch and deep link into external apps, falling back to web |
+    | [DeepLinkKit](https://github.com/button/DeepLinkKit) | Block-based deep link route matching |
+    | [Linker](https://github.com/MaksimKurpa/Linker) | Lightweight internal and external deep link handler |
+    | [LiteRoute](https://github.com/SpectralDragon/LiteRoute) | Transitions between VIPER modules in pure Swift |
+    | [Marshroute](https://github.com/avito-tech/Marshroute) | Simple but powerful router from Avito |
+    | [Router](https://github.com/freshOS/Router) | Minimal navigation helper for iOS |
+    | [SwiftCurrent](https://github.com/wwt/SwiftCurrent) | Library for managing complex multi-step workflows |
+    | [SwiftRouter](https://github.com/skyline75489/SwiftRouter) | URL router for iOS in Swift |
+    | [WAAppRouting](https://github.com/Wasappli/WAAppRouting) | URL recognition and controller display with preserved controller stacks |
+
+  </Tab>
+</Tabs>

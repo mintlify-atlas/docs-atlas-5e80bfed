@@ -1,0 +1,200 @@
+---
+title: "Animation & Graphics"
+description: "Libraries for animations, transitions, particle effects, SVG rendering, and drawing in iOS apps."
+---
+
+iOS has powerful native animation capabilities — these libraries make them easier to use and extend them with new effects.
+
+## Animation libraries
+
+<CardGroup cols={2}>
+  <Card title="Lottie" icon="film" href="https://github.com/airbnb/lottie-ios">
+    Airbnb's library for rendering Adobe After Effects animations natively on iOS using JSON files exported by Bodymovin
+  </Card>
+  <Card title="Spring" icon="wand-magic-sparkles" href="https://github.com/MengTo/Spring">
+    A library to simplify iOS animations with chainable API and IBDesignable support
+  </Card>
+  <Card title="Hero" icon="masks-theater" href="https://github.com/HeroTransitions/Hero">
+    Supercharged transition animations between view controllers
+  </Card>
+  <Card title="ViewAnimator" icon="play" href="https://github.com/marcosgriselli/ViewAnimator">
+    Bring your UI to life with just one line of code — complex animation combinations made easy
+  </Card>
+  <Card title="Stellar" icon="star" href="https://github.com/AugustRush/Stellar">
+    A fantastic physical animation library for Swift — spring, gravity, snap and more
+  </Card>
+  <Card title="Advance" icon="forward" href="https://github.com/timdonnelly/Advance">
+    Physics-based animation for iOS, tvOS, and macOS
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="All animation libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [Lottie](https://github.com/airbnb/lottie-ios) | Render After Effects animations natively |
+    | [Spring](https://github.com/MengTo/Spring) | Declarative animation with IBDesignable support |
+    | [Hero](https://github.com/HeroTransitions/Hero) | Supercharged view controller transitions |
+    | [ViewAnimator](https://github.com/marcosgriselli/ViewAnimator) | UI animation with one line of code |
+    | [Stellar](https://github.com/AugustRush/Stellar) | Physical animations (spring, gravity, snap) |
+    | [Advance](https://github.com/timdonnelly/Advance) | Physics-based animations |
+    | [EasyAnimation](https://github.com/icanzilb/EasyAnimation) | SwiftUI-style animation for UIKit |
+    | [Interpolate](https://github.com/marmelroy/Interpolate) | Gesture-driven animations |
+    | [IBAnimatable](https://github.com/IBAnimatable/IBAnimatable) | Design and prototype animations in Interface Builder |
+    | [AnimatedCollectionViewLayout](https://github.com/KelvinJin/AnimatedCollectionViewLayout) | Animated UICollectionView layout transitions |
+    | [Pulsator](https://github.com/shu223/Pulsator) | Pulse animation for iOS |
+    | [Keyframes](https://github.com/facebookarchive/Keyframes) | Facebook's library for fluid animations |
+    | [DKChainableAnimationKit](https://github.com/Draveness/DKChainableAnimationKit) | Chainable animations in Swift |
+    | [ChainPageCollectionView](https://github.com/jindulys/ChainPageCollectionView) | Fancy two-level collection view layout with chain page transitions |
+    | [Gemini](https://github.com/shoheiyokoyama/Gemini) | Rich scroll-based animation framework |
+    | [MotionAnimation](https://github.com/lkzhao/MotionAnimation) | Lightweight animation library for UIKit |
+    | [YapAnimator](https://github.com/yapstudios/YapAnimator) | Fast and friendly physics-based animator |
+    | [Pastel](https://github.com/cruisediary/Pastel) | Instagram-like gradient animation effect |
+    | [Comets](https://github.com/cruisediary/Comets) | Falling particles animation in Swift |
+    | [Wave](https://github.com/jtrivedi/Wave) | Spring-based animation engine for iOS and macOS |
+  </Accordion>
+</AccordionGroup>
+
+```swift Lottie example
+import Lottie
+
+let animationView = LottieAnimationView(name: "loading")
+animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+animationView.contentMode = .scaleAspectFit
+animationView.loopMode = .loop
+animationView.animationSpeed = 0.5
+view.addSubview(animationView)
+animationView.play()
+```
+
+## Transitions
+
+Transition libraries for presenting and dismissing view controllers with custom animations.
+
+<AccordionGroup>
+  <Accordion title="Transition libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [Hero](https://github.com/HeroTransitions/Hero) | Declarative transitions with automatic matching |
+    | [BubbleTransition](https://github.com/andreamazz/BubbleTransition) | Custom modal transition with expanding bubble |
+    | [ElasticTransition](https://github.com/lkzhao/ElasticTransition) | UIKit interactive transition with elastic edge |
+    | [Transition](https://github.com/Touchwonders/Transition) | Easy interactive interruptible custom transitions |
+    | [MusicPlayerTransition](https://github.com/xxxAIRINxxx/MusicPlayerTransition) | Custom interactive transition like Apple Music |
+    | [PinterestSwift](https://github.com/demonnico/PinterestSwift) | Pinterest-style transition |
+    | [StarWars.iOS](https://github.com/Yalantis/StarWars.iOS) | Star Wars opening crawl transition |
+    | [RevealingSplashView](https://github.com/PiXeL16/RevealingSplashView) | Splash views and animations inspired by Twitter |
+    | [SAHistoryNavigationViewController](https://github.com/marty-suzuki/SAHistoryNavigationViewController) | iOS task manager-like navigation UI |
+    | [SPLarkController](https://github.com/ivanvorobei/SPLarkController) | Modal controller with custom transition |
+    | [Cards](https://github.com/PaoloCuscela/Cards) | Awesome iOS 11 app card-style transitions |
+    | [AMKNavigationController](https://github.com/amirdew/AMKNavigationController) | Custom interactive navigation transitions |
+  </Accordion>
+</AccordionGroup>
+
+## Graphics & drawing
+
+Libraries for custom drawing, SVG rendering, and CoreGraphics utilities.
+
+<CardGroup cols={2}>
+  <Card title="Macaw" icon="paintbrush" href="https://github.com/exyte/macaw">
+    Powerful and easy-to-use vector graphics library with full SVG support
+  </Card>
+  <Card title="Drawsana" icon="pen" href="https://github.com/Asana/Drawsana">
+    iOS framework for building raster drawing and image markup views
+  </Card>
+  <Card title="SVGKit" icon="image" href="https://github.com/SVGKit/SVGKit">
+    Display and interact with SVG images on iOS using native CoreAnimation rendering
+  </Card>
+  <Card title="SwiftSVG" icon="vector-square" href="https://github.com/mchoe/SwiftSVG">
+    Single-pass SVG parser with UIBezierPath, CAShapeLayer, and UIView output
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="All graphics libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [Macaw](https://github.com/exyte/macaw) | SVG support and vector graphics in Swift |
+    | [Drawsana](https://github.com/Asana/Drawsana) | Raster drawing and image markup |
+    | [SVGKit](https://github.com/SVGKit/SVGKit) | SVG rendering via CoreAnimation |
+    | [SwiftSVG](https://github.com/mchoe/SwiftSVG) | Single-pass SVG parser |
+    | [InkKit](https://github.com/shaps80/InkKit) | Write-once, draw-everywhere for iOS and macOS |
+    | [jot](https://github.com/IFTTT/jot) | Add drawings and text to images |
+    | [Snowflake](https://github.com/onmyway133/Snowflake) | SVG in Swift |
+    | [AEConicalGradient](https://github.com/tadija/AEConicalGradient) | Conical (angular) gradient layer |
+    | [AnimatedGradientView](https://github.com/rwbutler/AnimatedGradientView) | Animated gradient backgrounds |
+    | [BlockiesSwift](https://github.com/Boilertalk/BlockiesSwift) | Unique blocky identicons/profile pictures |
+    | [DePict](https://github.com/davidcairns/DePict) | Simple, declarative, functional drawing framework |
+    | [EZYGradientView](https://github.com/shashankpali/EZYGradientView) | Gradients and blur gradients without code |
+    | [Rough](https://github.com/bakhtiyork/Rough) | Hand-drawn sketchy style graphics |
+    | [MKGradientView](https://github.com/maxkonovalov/MKGradientView) | Linear, radial, conical and bilinear gradients |
+    | [ProcessingKit](https://github.com/natmark/ProcessingKit) | Visual designing library (Processing-like API) |
+    | [YYAsyncLayer](https://github.com/ibireme/YYAsyncLayer) | Asynchronous rendering and display |
+  </Accordion>
+</AccordionGroup>
+
+## Media (audio, image & video)
+
+<AccordionGroup>
+  <Accordion title="Audio libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [AudioKit](https://github.com/audiokit/AudioKit) | Powerful audio synthesis, processing, and analysis |
+    | [SwiftySound](https://github.com/adamcichy/SwiftySound) | Play sounds with a single line of code |
+    | [AudioPlayer](https://github.com/delannoyk/AudioPlayer) | Syntax and feature sugar over AVPlayer |
+    | [Beethoven](https://github.com/vadymmarkov/Beethoven) | Pitch detection for musical signals |
+    | [EZAudio](https://github.com/syedhali/EZAudio) | Real-time audio visualization |
+    | [Pulse](https://github.com/kean/Pulse) | Logging system with network inspection for Apple platforms |
+    | [SubtleVolume](https://github.com/andreamazz/SubtleVolume) | Replace system volume popup with subtle indicator |
+    | [FDWaveformView](https://github.com/fulldecent/FDWaveformView) | Display audio waveforms with animation |
+  </Accordion>
+  <Accordion title="Image processing & viewing">
+    | Library | Description |
+    |---------|-------------|
+    | [GPUImage2](https://github.com/BradLarson/GPUImage2) | GPU-accelerated image and video processing (Swift) |
+    | [GPUImage3](https://github.com/BradLarson/GPUImage3) | GPUImage 3 using Metal |
+    | [Harbeth](https://github.com/yangKJ/Harbeth) | Metal API for GPU-accelerated graphics and video |
+    | [SKPhotoBrowser](https://github.com/suzuki-0000/SKPhotoBrowser) | Photo browser/viewer inspired by Facebook and Twitter |
+    | [Lightbox](https://github.com/hyperoslo/Lightbox) | Convenient image viewer |
+    | [ImageViewer](https://github.com/Krisiacik/ImageViewer) | Image viewer à la Twitter |
+    | [AlamofireImage](https://github.com/Alamofire/AlamofireImage) | Image component library for Alamofire |
+    | [Kingfisher](https://github.com/onevcat/Kingfisher) | Lightweight library for downloading and caching images |
+    | [FaceAware](https://github.com/BeauNouvelle/FaceAware) | UIImageView that focuses on faces with AspectFill |
+    | [SFSafeSymbols](https://github.com/piknotech/SFSafeSymbols) | Safely access Apple's SF Symbols with static typing |
+  </Accordion>
+  <Accordion title="GIF libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [FLAnimatedImage](https://github.com/Flipboard/FLAnimatedImage) | Performant animated GIF engine for iOS |
+    | [gifu](https://github.com/kaishin/gifu) | High-performance animated GIF support |
+    | [SwiftyGif](https://github.com/kirualex/SwiftyGif) | High performance GIF engine |
+    | [APNGKit](https://github.com/onevcat/APNGKit) | High performance APNG playback |
+    | [YYImage](https://github.com/ibireme/YYImage) | Animated WebP, APNG, GIF and more |
+  </Accordion>
+  <Accordion title="Video players">
+    | Library | Description |
+    |---------|-------------|
+    | [MobilePlayer](https://github.com/mobileplayer/mobileplayer-ios) | Fully customizable media player |
+    | [Player](https://github.com/piemonte/Player) | Simple video player in Swift |
+    | [VLC for iOS](https://github.com/videolan/vlc-ios) | Free and open source multimedia player |
+    | [XCDYouTubeKit](https://github.com/0xced/XCDYouTubeKit) | YouTube video player for iOS/tvOS/macOS |
+    | [BMPlayer](https://github.com/BrikerMan/BMPlayer) | Video player based on AVPlayer with gesture support |
+    | [ZFPlayer](https://github.com/renzifeng/ZFPlayer) | AVPlayer with full screen, brightness, volume controls |
+  </Accordion>
+</AccordionGroup>
+
+## Game development
+
+<CardGroup cols={2}>
+  <Card title="glide engine" icon="gamepad" href="https://github.com/cocoatoucher/Glide">
+    SpriteKit and GameplayKit based engine for making 2D games
+  </Card>
+  <Card title="CollectionNode" icon="grid-2" href="https://github.com/bwide/CollectionNode">
+    A Swift framework for a collectionView in SpriteKit
+  </Card>
+  <Card title="AssetImportKit" icon="cube" href="https://github.com/eugenebokhan/AssetImportKit">
+    Convert Assimp-supported 3D models to SceneKit scenes
+  </Card>
+  <Card title="SKTiled" icon="map" href="https://github.com/mfessenden/SKTiled">
+    Swift framework for working with Tiled assets in SpriteKit
+  </Card>
+</CardGroup>

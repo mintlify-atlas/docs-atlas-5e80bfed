@@ -1,0 +1,218 @@
+---
+title: 'Hardware libraries'
+description: 'iOS libraries for Bluetooth, camera, location, iBeacon, device capabilities, and GCD threading utilities.'
+keywords: ['bluetooth', 'camera', 'location', 'ibeacon', 'nfc', 'haptics', 'gcd', 'maps', 'corelocation', 'mapkit']
+---
+
+This page covers libraries for interacting with iOS hardware and device capabilities, including Bluetooth, camera and image capture, location and mapping, iBeacon proximity detection, device sensors, and Grand Central Dispatch utilities.
+
+<AccordionGroup>
+
+  <Accordion title="Bluetooth & wireless">
+
+    Libraries wrapping CoreBluetooth and MultipeerConnectivity for BLE communication and peer-to-peer device connectivity.
+
+    | Library | Description |
+    |---------|-------------|
+    | [BluetoothKit](https://github.com/rhummelmose/BluetoothKit) | Easily communicate between iOS/macOS devices using BLE. |
+    | [BlueCap](https://github.com/troystribling/BlueCap) | Full-featured iOS Bluetooth LE framework with async/await support. |
+    | [Bluejay](https://github.com/steamclock/bluejay) | A simple Swift framework for building reliable Bluetooth LE apps. |
+    | [BabyBluetooth](https://github.com/coolnameismy/BabyBluetooth) | The easiest way to use Bluetooth (BLE) in iOS/macOS. |
+    | [LGBluetooth](https://github.com/LGBluetooth/LGBluetooth) | Simple, block-based, lightweight library over CoreBluetooth. |
+    | [Bleu](https://github.com/1amageek/Bleu) | BLE (Bluetooth LE) for U — a modern BLE wrapper. |
+    | [Bluetonium](https://github.com/e-sites/Bluetonium) | Bluetooth mapping in Swift. |
+    | [ExtendaBLE](https://github.com/AntonTheDev/ExtendaBLE) | Simple blocks-based BLE client for iOS/tvOS/watchOS/macOS/Android. Supports packet-based read/write and characteristic callbacks. |
+    | [PeerKit](https://github.com/jpsim/PeerKit) | Open-source Swift framework for building event-driven, zero-config Multipeer Connectivity apps. |
+    | [PeerConnectivity](https://github.com/rchatham/PeerConnectivity) | Functional wrapper for Apple's MultipeerConnectivity framework. |
+    | [MultiPeer](https://github.com/dingwilson/MultiPeer) | Wrapper for MultipeerConnectivity for offline data transmission between Apple devices via Bluetooth or Wi-Fi. |
+    | [AZPeerToPeerConnection](https://github.com/AfrozZaheer/AZPeerToPeerConnection) | Wrapper on top of MultipeerConnectivity with easier session management. |
+    | [Apple Family](https://github.com/kirankunigiri/Apple-Family) | Quickly connect Apple devices together with Bluetooth, Wi-Fi, and USB. |
+    | [Discovery](https://github.com/omergul/Discovery) | Discover and retrieve data from nearby devices, even when the peer app runs in the background. |
+    | [BerkananSDK](https://github.com/zssz/BerkananSDK) | Mesh messaging SDK for decentralized mesh networking powered by Bluetooth. |
+
+  </Accordion>
+
+  <Accordion title="Camera & image capture">
+
+    Frameworks for camera integration, image picking, barcode scanning, and custom AVFoundation camera views.
+
+    <Note>
+      YPImagePicker is one of the most popular image picker libraries with an Instagram-like UI. It supports photo libraries, camera capture, and video, with a clean Swift API.
+    </Note>
+
+    ```swift YPImagePicker example
+    import YPImagePicker
+
+    var config = YPImagePickerConfiguration()
+    config.screens = [.library, .photo, .video]
+    config.startOnScreen = .library
+
+    let picker = YPImagePicker(configuration: config)
+    picker.didFinishPicking { [unowned picker] items, cancelled in
+        if let photo = items.singlePhoto {
+            imageView.image = photo.image
+        }
+        picker.dismiss(animated: true)
+    }
+    present(picker, animated: true)
+    ```
+
+    | Library | Description |
+    |---------|-------------|
+    | [YPImagePicker](https://github.com/Yummypets/YPImagePicker) | Instagram-like image picker with filters for iOS. Supports photo library, camera, and video. |
+    | [NextLevel](https://github.com/NextLevel/NextLevel) | Media capture camera library with advanced controls for iOS. |
+    | [CameraKit-iOS](https://github.com/CameraKit/camerakit-ios) | Massively increases camera performance and ease of use. |
+    | [SwiftyCam](https://github.com/Awalz/SwiftyCam) | A Snapchat-inspired iOS camera framework written in Swift. |
+    | [MijickCamera](https://github.com/Mijick/Camera) | Fully customizable camera library for SwiftUI that reduces implementation time. |
+    | [SCRecorder](https://github.com/rFlex/SCRecorder) | Camera engine with Vine-like tap to record, animatable filters, slow motion, and segments editing. |
+    | [Lumina](https://github.com/dokun1/Lumina) | Full-service camera that takes photos, videos, streams frames, detects metadata, and streams CoreML predictions. |
+    | [CameraManager](https://github.com/imaginary-cloud/CameraManager) | Simple Swift class providing all configurations needed to create a custom camera view. |
+    | [BarcodeScanner](https://github.com/hyperoslo/BarcodeScanner) | Simple and beautiful barcode scanner. |
+    | [RSBarcodes_Swift](https://github.com/yeahdongcn/RSBarcodes_Swift) | 1D and 2D barcode reader and generator for iOS 8+. |
+    | [ALCameraViewController](https://github.com/AlexLittlejohn/ALCameraViewController) | Camera view controller with custom image picker and image cropping. Written in Swift. |
+    | [Fusuma](https://github.com/ytakzk/Fusuma) | Instagram-like photo browser and camera with a few lines of code in Swift. |
+    | [PBJVision](https://github.com/piemonte/PBJVision) | iOS camera engine with touch-to-record video, slow motion, and photo capture. |
+    | [FastttCamera](https://github.com/IFTTT/FastttCamera) | Fast and easy camera framework for iOS with customizable filters. |
+    | [DKCamera](https://github.com/zhangao0086/DKCamera) | Lightweight and simple camera framework for iOS, written in Swift. |
+    | [HybridCamera](https://github.com/eonist/HybridCamera) | Combined video and photo camera for iOS, similar to the Snapchat camera. |
+    | [ExyteMediaPicker](https://github.com/exyte/mediapicker) | Customizable media picker for photos and videos. |
+    | [TakeASelfie](https://github.com/abdullahselek/TakeASelfie) | Uses the front camera, detects your face, and takes a selfie. |
+    | [FDTake](https://github.com/fulldecent/FDTake) | Easily take a photo or video, or choose from the library. |
+    | [MockImagePicker](https://github.com/yonat/MockImagePicker) | Mock UIImagePickerController for testing camera-based UI in the simulator. |
+    | [iOS-Depth-Sampler](https://github.com/shu223/iOS-Depth-Sampler) | A collection of code examples for Depth APIs. |
+    | [RAImagePicker](https://github.com/rallahaseh/RAImagePicker) | Protocol-oriented framework providing custom features from the built-in Image Picker. |
+    | [TGCameraViewController](https://github.com/tdginternet/TGCameraViewController) | Custom camera with AVFoundation. Beautiful, light, and easy to integrate. |
+    | [CameraBackground](https://github.com/yonat/CameraBackground) | Show camera layer as a background to any UIView. |
+    | [LLSimpleCamera](https://github.com/omergul/LLSimpleCamera) | A simple, customizable camera and video recorder for iOS. |
+    | [CameraEngine](https://github.com/remirobert/CameraEngine) | Camera engine for iOS, written in Swift, built above AVFoundation. |
+    | [Cool-iOS-Camera](https://github.com/GabrielAlva/Cool-iOS-Camera) | Fully customizable and modern camera implementation using AVFoundation. |
+    | [HorizonSDK-iOS](https://github.com/HorizonCamera/HorizonSDK-iOS) | State-of-the-art real-time video recording and photo shooting library. |
+
+  </Accordion>
+
+  <Accordion title="Location & mapping">
+
+    CoreLocation wrappers, MapKit extensions, geocoding helpers, and geofencing utilities.
+
+    **Location libraries**
+
+    | Library | Description |
+    |---------|-------------|
+    | [SwiftLocation](https://github.com/malcommac/SwiftLocation) | Location and Beacon monitoring in Swift with a modern async API. |
+    | [AsyncLocationKit](https://github.com/AsyncSwift/AsyncLocationKit) | Wrapper for Apple CoreLocation framework with Modern Concurrency Swift (async/await). |
+    | [LocationManager](https://github.com/intuit/LocationManager) | Block-based asynchronous API to request the current location, once or continuously. |
+    | [BBLocationManager](https://github.com/benzamin/BBLocationManager) | Location manager for easily implementing location services and geofencing in iOS. |
+    | [LocationPicker](https://github.com/ZhuoranTan/LocationPicker) | A ready-to-use and fully customizable location picker for your app. |
+    | [SOMotionDetector](https://github.com/arturdev/SOMotionDetector) | Simple library to detect motion based on location updates and acceleration. |
+    | [IngeoSDK](https://github.com/IngeoSDK/ingeo-ios-sdk) | Always-on location monitoring framework for iOS. |
+    | [NominatimKit](https://github.com/caloon/NominatimKit) | A Swift wrapper for (reverse) geocoding of OpenStreetMap data. |
+    | [set-simulator-location](https://github.com/lyft/set-simulator-location) | CLI for setting location in the iOS simulator. |
+
+    **Map libraries**
+
+    | Library | Description |
+    |---------|-------------|
+    | [Mapbox GL](https://github.com/mapbox/mapbox-gl-native) | An OpenGL renderer for Mapbox Vector Tiles with SDK bindings for iOS. |
+    | [WhirlyGlobe-Maply](https://github.com/mousebird/WhirlyGlobe) | 3D globe and flat-map SDK for iOS supporting a wide variety of GIS data formats. |
+    | [GEOSwift](https://github.com/GEOSwift/GEOSwift) | The Swift Geographic Engine for geometric operations. |
+    | [FlyoverKit](https://github.com/SvenTiigi/FlyoverKit) | Present stunning 360° flyover views on MKMapView with zero effort. |
+    | [ClusterKit](https://github.com/hulab/ClusterKit) | Map clustering framework targeting MapKit, Google Maps, and Mapbox. |
+    | [Cluster](https://github.com/efremidze/Cluster) | Easy map annotation clustering for MKMapView. |
+    | [MapViewPlus](https://github.com/okhanokbay/MapViewPlus) | Use any custom view as a callout view for MKMapView with animations. |
+    | [JDSwiftHeatMap](https://github.com/jamesdouble/JDSwiftHeatMap) | Native MapKit library for creating highly customized heat maps. |
+    | [PXGoogleDirections](https://github.com/poulpix/PXGoogleDirections) | Google Directions API helper for iOS, written in Swift. |
+    | [MSFlightMapView](https://github.com/mabdulsubhan/MSFlightMapView) | Add and animate geodesic flights on Google Maps. |
+
+  </Accordion>
+
+  <Accordion title="iBeacon & proximity">
+
+    Libraries for iBeacon detection, broadcasting, and proximity-based experiences.
+
+    | Library | Description |
+    |---------|-------------|
+    | [SwiftLocation](https://github.com/malcommac/SwiftLocation) | Location and Beacon monitoring in Swift. Includes iBeacon ranging and monitoring. |
+    | [JMCBeaconManager](https://github.com/izotx/JMCBeaconManager) | An iBeacon manager class responsible for detecting beacons nearby. |
+    | [Vicinity](https://github.com/Instrument/Vicinity) | Replicates iBeacons by analyzing RSSI; supports broadcasting and detecting low-energy Bluetooth devices in the background. |
+    | [Proxitee](https://github.com/Proxitee/iOS-SDK) | Allows developers to create proximity-aware applications utilizing iBeacons and geo fences. |
+    | [OWUProximityManager](https://github.com/ohayon/OWUProximityManager) | Combined iBeacons and CoreBluetooth proximity manager. |
+    | [BeaconEmitter](https://github.com/lgaches/BeaconEmitter) | Turn your Mac into an iBeacon for testing. |
+
+    <Tip>
+      For production proximity features, consider pairing an iBeacon library with [SwiftLocation](https://github.com/malcommac/SwiftLocation) for unified location and beacon monitoring in a single dependency.
+    </Tip>
+
+  </Accordion>
+
+  <Accordion title="Device capabilities">
+
+    Libraries for NFC, haptic feedback, motion sensors, device identification, and hardware info.
+
+    **Device information**
+
+    | Library | Description |
+    |---------|-------------|
+    | [DeviceKit](https://github.com/devicekit/DeviceKit) | A value-type replacement for UIDevice with model detection and screen size info. |
+    | [Device](https://github.com/Ekhoo/Device) | Lightweight tool for detecting the current device and screen size written in Swift. |
+    | [Device.swift](https://github.com/schickling/Device.swift) | Super-lightweight library to detect the device in use. |
+    | [Deviice](https://github.com/andrealufino/Deviice) | Simple library to detect the device on which the app is running with properties. |
+    | [Luminous](https://github.com/andrealufino/Luminous) | Large framework providing more than 50 pieces of information about the current system. |
+    | [UIDeviceComplete](https://github.com/Nirma/UIDeviceComplete) | UIDevice extensions that fill in the missing pieces. |
+    | [SDVersion](https://github.com/sebyddd/SDVersion) | Lightweight Cocoa library for detecting the running device's model and screen size. |
+
+    **Motion & sensors**
+
+    | Library | Description |
+    |---------|-------------|
+    | [MotionKit](https://github.com/MHaroonBaig/MotionKit) | Get data from Accelerometer, Gyroscope, and Magnetometer in two lines of code. CoreMotion made simple. |
+    | [WatchShaker](https://github.com/ezefranca/WatchShaker) | watchOS helper to detect shake movement, written in Swift. |
+    | [WatchCon](https://github.com/abdullahselek/WatchCon) | Enables easy connectivity between iOS and watchOS. |
+
+    **Haptics**
+
+    | Library | Description |
+    |---------|-------------|
+    | [TapticEngine](https://github.com/WorldDownTown/TapticEngine) | Generates iOS device vibrations using the Taptic Engine. |
+    | [Haptico](https://github.com/iSapozhnik/Haptico) | Easy-to-use haptic feedback generator with pattern-play support. |
+
+    **NFC**
+
+    | Library | Description |
+    |---------|-------------|
+    | [NFCNDEFParse](https://github.com/jvk75/NFCNDEFParse) | NFC Forum Well Known Type Data Parser for iOS 11 and Core NFC. |
+    | [NFCPassportReader](https://github.com/AndyQ/NFCPassportReader) | Swift library to read NFC-enabled passports. Supports BAC, Secure Messaging, and active/passive authentication. Requires iOS 13+. |
+
+    **Connectivity**
+
+    | Library | Description |
+    |---------|-------------|
+    | [DarkLightning](https://github.com/jensmeder/DarkLightning) | The fastest way to transmit data between iOS/tvOS and macOS. |
+
+  </Accordion>
+
+  <Accordion title="GCD & threading utilities">
+
+    Grand Central Dispatch syntax helpers, timers, and thread-safety utilities.
+
+    | Library | Description |
+    |---------|-------------|
+    | [Async](https://github.com/duemunk/Async) | Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch. |
+    | [GCDKit](https://github.com/JohnEstropia/GCDKit) | Grand Central Dispatch simplified with Swift. |
+    | [Dispatch](https://github.com/JARMourato/Dispatch) | A tiny library to make using GCD easier and more intuitive. |
+    | [GCDTimer](https://github.com/hemantasapkota/GCDTimer) | Well-tested Grand Central Dispatch (GCD) Timer in Swift. |
+    | [Chronos-Swift](https://github.com/comyar/Chronos-Swift) | Grand Central Dispatch utilities including repeating timers. |
+    | [GrandSugarDispatch](https://github.com/jessesquires/GrandSugarDispatch) | Syntactic sugar for Grand Central Dispatch (GCD). |
+    | [SwiftSafe](https://github.com/nodes-ios/SwiftSafe) | Thread synchronization made easy with reader-writer patterns. |
+    | [AlecrimAsyncKit](https://github.com/Alecrim/AlecrimAsyncKit) | Bringing async and await to Swift with GCD flavoring. |
+    | [Threader](https://github.com/mitchtreece/Threader) | Pretty GCD calls and easier code execution. |
+    | [Me](https://github.com/pascalbros/Me) | A super slim solution to nested asynchronous computations. |
+    | [YYDispatchQueuePool](https://github.com/ibireme/YYDispatchQueuePool) | iOS utility class to manage global dispatch queue pools. |
+    | [SwiftyTask](https://github.com/Albinzr/SwiftyTask) | An extreme queuing system with high performance for managing all tasks in an app with closures. |
+
+    <Tip>
+      For more comprehensive concurrency primitives including coroutines, actors, and typed threads, see the [Concurrency](/libraries/concurrency) page.
+    </Tip>
+
+  </Accordion>
+
+</AccordionGroup>

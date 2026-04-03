@@ -1,0 +1,168 @@
+---
+title: 'Concurrency'
+description: 'Libraries for async/await helpers, GCD utilities, operation-based concurrency, actor model, and coroutines on iOS.'
+keywords: ['concurrency', 'async', 'await', 'GCD', 'dispatch', 'promises', 'futures', 'actors', 'coroutines', 'Swift']
+---
+
+iOS concurrency spans several eras of API design — from raw GCD to operation queues to modern Swift concurrency. This page covers libraries that provide syntax sugar, higher-level abstractions, and alternative concurrency models.
+
+## Modern concurrency helpers
+
+Libraries built around or designed to work alongside Swift's native `async`/`await` and structured concurrency.
+
+<CardGroup cols={2}>
+  <Card
+    title="AsyncQueue"
+    icon="layer-group"
+    href="https://github.com/dfed/swift-async-queue"
+  >
+    A library of queues that enable sending ordered tasks from synchronous to asynchronous contexts.
+  </Card>
+  <Card
+    title="AsyncNinja"
+    icon="star"
+    href="https://github.com/AsyncNinja/AsyncNinja"
+  >
+    A complete set of concurrency and reactive programming primitives for Swift.
+  </Card>
+</CardGroup>
+
+---
+
+## GCD utilities and syntax sugar
+
+These libraries wrap Grand Central Dispatch with cleaner, more readable APIs.
+
+<CardGroup cols={2}>
+  <Card
+    title="Async"
+    icon="clock"
+    href="https://github.com/duemunk/Async"
+  >
+    Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch.
+  </Card>
+  <Card
+    title="Dispatch"
+    icon="arrow-right-arrow-left"
+    href="https://github.com/JARMourato/Dispatch"
+  >
+    A tiny library to make using GCD easier and more intuitive.
+  </Card>
+  <Card
+    title="GCDKit"
+    icon="microchip"
+    href="https://github.com/JohnEstropia/GCDKit"
+  >
+    Grand Central Dispatch simplified with Swift.
+  </Card>
+  <Card
+    title="Threader"
+    icon="arrows-rotate"
+    href="https://github.com/mitchtreece/Threader"
+  >
+    Pretty GCD calls and easier code execution context switching.
+  </Card>
+</CardGroup>
+
+```swift Async (GCD syntax sugar) example
+import Async
+
+Async.background {
+    // Runs on a background thread
+    let data = fetchExpensiveData()
+    return data
+}.main { data in
+    // Back on the main thread
+    self.tableView.reloadData()
+}
+```
+
+Full list of GCD utilities:
+
+- [Async](https://github.com/duemunk/Async) — Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch.
+- [Chronos-Swift](https://github.com/comyar/Chronos-Swift) — Grand Central Dispatch utilities including a repeating timer.
+- [Dispatch](https://github.com/JARMourato/Dispatch) — Tiny library to make using GCD easier and intuitive.
+- [GCDKit](https://github.com/JohnEstropia/GCDKit) — Grand Central Dispatch simplified with Swift.
+- [GCDTimer](https://github.com/hemantasapkota/GCDTimer) — Well tested GCD Timer in Swift.
+- [GrandSugarDispatch](https://github.com/jessesquires/GrandSugarDispatch) — Syntactic sugar for Grand Central Dispatch.
+- [Me](https://github.com/pascalbros/Me) — A super slim solution to the nested asynchronous computations problem.
+- [SwiftSafe](https://github.com/nodes-ios/SwiftSafe) — Thread synchronization made easy.
+- [SwiftyTask](https://github.com/Albinzr/SwiftyTask) — An extreme queuing system with high performance for managing all tasks in an app with closures.
+- [Threader](https://github.com/mitchtreece/Threader) — Pretty GCD calls and easier code execution.
+- [YYDispatchQueuePool](https://github.com/ibireme/YYDispatchQueuePool) — iOS utility class to manage global dispatch queues and avoid thread explosion.
+- [AlecrimAsyncKit](https://github.com/Alecrim/AlecrimAsyncKit) — Bringing async and await to Swift world with some flavouring (pre-Swift 5.5 async/await).
+
+---
+
+## Operation-based concurrency
+
+Libraries built on top of `OperationQueue` for structured, cancellable task pipelines.
+
+- [Queuer](https://github.com/FabrizioBrancati/Queuer) — A queue manager built on top of OperationQueue and Dispatch (aka GCD).
+- [Overdrive](https://github.com/saidsikira/Overdrive) — Fast async task-based Swift framework with focus on type safety, concurrency, and multi-threading.
+- [Kommander](https://github.com/intelygenz/Kommander-iOS) — Swift library to manage task execution in different threads using a Kommand concept.
+- [Flow](https://github.com/JohnSundell/Flow) — Operation-oriented programming in Swift.
+- [GroupWork](https://github.com/quanvo87/GroupWork) — Easy concurrent, asynchronous tasks in Swift.
+- [SwiftQueue](https://github.com/lucas34/SwiftQueue) — Job scheduler with concurrent run, failure/retry, persistence, repeat, delay, and more.
+- [Brisk](https://github.com/jmfieldman/Brisk) — A Swift DSL that allows concise and effective concurrency manipulation.
+
+---
+
+## Actor model libraries
+
+Libraries implementing the actor model for safe concurrent state management.
+
+- [Aojet](https://github.com/aojet/Aojet) — An actor model library for Swift.
+
+---
+
+## Coroutines
+
+- [SwiftCoroutine](https://github.com/belozierov/SwiftCoroutine) — Swift coroutines library for iOS and macOS. Supports `await`, `async`, and channel primitives.
+- [Venice](https://github.com/Zewo/Venice) — CSP (Coroutines, Channels, Select) for Swift. Inspired by Go's concurrency model.
+
+---
+
+## Promises and futures
+
+<CardGroup cols={2}>
+  <Card
+    title="PromiseKit"
+    icon="link"
+    href="https://github.com/mxcl/PromiseKit"
+  >
+    Promises for iOS and macOS. The most widely adopted promises library in the ecosystem.
+  </Card>
+  <Card
+    title="BrightFutures"
+    icon="sun"
+    href="https://github.com/Thomvis/BrightFutures"
+  >
+    Write great asynchronous code in Swift using futures and promises.
+  </Card>
+</CardGroup>
+
+- [PromiseKit](https://github.com/mxcl/PromiseKit) — Promises for iOS and macOS. Battle-tested and widely used.
+- [BrightFutures](https://github.com/Thomvis/BrightFutures) — Write great asynchronous code in Swift using futures and promises.
+- [Hydra](https://github.com/malcommac/Hydra) — Promises and Await. Write better async code in Swift.
+- [FutureKit](https://github.com/FutureKit/FutureKit) — A Swift-based Future/Promises library for iOS and macOS.
+- [Bolts-Swift](https://github.com/BoltsFramework/Bolts-Swift) — Low-level libraries for tasks (promises) and deep links from Parse/Facebook.
+- [then](https://github.com/freshOS/then) — Elegant async code in Swift using a chainable `.then` syntax.
+- [When](https://github.com/vadymmarkov/When) — A lightweight implementation of Promises in Swift.
+- [SwiftTask](https://github.com/ReactKit/SwiftTask) — Promise + progress + pause + cancel + retry for Swift.
+- [Promis](https://github.com/albertodebortoli/Promis) — The easiest Future and Promises framework in Swift. No magic, no boilerplate.
+- [Bluebird.swift](https://github.com/AndrewBarba/Bluebird.swift) — Promise/A+ implementation in Swift 4, inspired by Bluebird.js.
+- [Promise](https://github.com/khanlou/Promise) — A Promise library for Swift, partially based on the JavaScript A+ spec.
+- [promises](https://github.com/google/promises) — Google's synchronization construct for Objective-C and Swift to facilitate writing asynchronous code.
+- [Futures](https://github.com/formbound/Futures) — Lightweight promises for iOS, macOS, tvOS, watchOS, and server-side Swift.
+- [EasyFutures](https://github.com/DimaMishchenko/EasyFutures) — Swift Futures and Promises. Easy to use and highly combinable.
+- [FutureLib](https://github.com/couchdeveloper/FutureLib) — Pure Swift 2 library implementing Futures and Promises inspired by Scala.
+
+---
+
+## Other concurrency primitives
+
+- [Concurrent](https://github.com/typelift/Concurrent) — Functional concurrency primitives in Swift.
+- [Threadly](https://github.com/nvzqz/Threadly) — Type-safe thread-local storage in Swift.
+- [StickyLocking](https://github.com/stickytools/sticky-locking) — A general-purpose embedded hierarchical lock manager for building highly concurrent applications.
+- [Flow-iOS](https://github.com/roytornado/Flow-iOS) — Make your logic flow and data flow clean and human readable.

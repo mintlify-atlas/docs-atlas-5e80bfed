@@ -1,0 +1,146 @@
+---
+title: "Layout"
+description: "Auto Layout DSLs, Flexbox implementations, and programmatic layout frameworks for iOS."
+---
+
+Writing Auto Layout constraints in raw Swift or Objective-C is verbose. These libraries give you concise, readable syntax while staying close to the native APIs.
+
+## Auto Layout DSLs
+
+<CardGroup cols={2}>
+  <Card title="SnapKit" icon="crop" href="https://github.com/SnapKit/SnapKit">
+    The most popular Auto Layout DSL for Swift — clean chainable syntax for iOS and macOS
+  </Card>
+  <Card title="PureLayout" icon="table-columns" href="https://github.com/PureLayout/PureLayout">
+    The ultimate API for iOS and macOS Auto Layout — Objective-C and Swift compatible
+  </Card>
+  <Card title="Cartography" icon="pen-ruler" href="https://github.com/robb/Cartography">
+    Declarative Auto Layout DSL using operator overloading in Swift
+  </Card>
+  <Card title="TinyConstraints" icon="minimize" href="https://github.com/roberthein/TinyConstraints">
+    Syntactic sugar that makes Auto Layout sweeter for human use
+  </Card>
+  <Card title="EasyPeasy" icon="leaf" href="https://github.com/nakiostudio/EasyPeasy">
+    Auto Layout made easy — define constraints with a fluent API
+  </Card>
+  <Card title="Stevia" icon="code" href="https://github.com/freshOS/Stevia">
+    Elegant view layout for iOS — works with both Auto Layout and manual layout
+  </Card>
+</CardGroup>
+
+```swift SnapKit
+import SnapKit
+
+view.addSubview(button)
+button.snp.makeConstraints { make in
+    make.centerX.equalToSuperview()
+    make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+    make.width.equalTo(200)
+    make.height.equalTo(44)
+}
+```
+
+```swift PureLayout
+import PureLayout
+
+imageView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+imageView.autoSetDimension(.height, toSize: 200)
+```
+
+```swift Cartography
+import Cartography
+
+constrain(button, view) { button, view in
+    button.centerX == view.centerX
+    button.bottom == view.bottom - 20
+    button.width == 200
+    button.height == 44
+}
+```
+
+<AccordionGroup>
+  <Accordion title="All Auto Layout libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [SnapKit](https://github.com/SnapKit/SnapKit) | Most popular Swift Auto Layout DSL |
+    | [PureLayout](https://github.com/PureLayout/PureLayout) | Ultimate Auto Layout API, ObjC and Swift |
+    | [Cartography](https://github.com/robb/Cartography) | Declarative DSL with operator overloading |
+    | [TinyConstraints](https://github.com/roberthein/TinyConstraints) | Syntactic sugar for NSLayoutConstraint |
+    | [EasyPeasy](https://github.com/nakiostudio/EasyPeasy) | Fluent Auto Layout API |
+    | [Stevia](https://github.com/freshOS/Stevia) | Elegant layout for iOS |
+    | [Masonry](https://github.com/SnapKit/Masonry) | Objective-C chainable Auto Layout DSL |
+    | [Anchorage](https://github.com/Rightpoint/Anchorage) | Operators and utilities for concise layout code |
+    | [Anchorman](https://github.com/mergesort/Anchorman) | Auto Layout library for San Diego's finest |
+    | [MisterFusion](https://github.com/marty-suzuki/MisterFusion) | Swift DSL that works in both Swift and Objective-C |
+    | [Manuscript](https://github.com/floriankrueger/Manuscript) | AutoLayoutKit in pure Swift |
+    | [SwiftAutoLayout](https://github.com/indragiek/SwiftAutoLayout) | Tiny Swift DSL for Autolayout |
+    | [Restraint](https://github.com/puffinsupply/Restraint) | Minimal Auto Layout in Swift |
+    | [Bamboo](https://github.com/wordlessj/Bamboo) | Elegant and concise Auto Layout |
+    | [Yalta](https://github.com/kean/Align) | Intuitive and powerful Auto Layout library |
+    | [EasyAnchor](https://github.com/onmyway133/EasyAnchor) | Declarative, extensible, powerful Auto Layout |
+    | [SugarAnchor](https://github.com/ashikahmad/SugarAnchor) | NSLayoutAnchor with natural syntactic sugar |
+    | [QuickLayout](https://github.com/huri000/QuickLayout) | Simple way to manage Auto Layout in code |
+    | [SuperLayout](https://github.com/lionheart/SuperLayout) | Simplify Auto Layout with super syntactic sugar |
+    | [MondrianLayout](https://github.com/muukii/MondrianLayout) | DSL-based layout builder for Auto Layout |
+    | [Layoutless](https://github.com/DeclarativeHub/Layoutless) | Minimalistic declarative layout and styling |
+    | [MiniLayout](https://github.com/yonat/MiniLayout) | Minimal Auto Layout convenience layer |
+    | [Neon](https://github.com/mamaral/Neon) | Powerful Swift programmatic UI layout framework |
+    | [LayoutKit](https://github.com/linkedin/LayoutKit) | Fast view layout library by LinkedIn |
+    | [Framezilla](https://github.com/Otbivnoe/Framezilla) | Frame-based layout with a nice chaining syntax |
+    | [FormationLayout](https://github.com/evan-liu/FormationLayout) | Work with auto layout and size classes easily |
+  </Accordion>
+</AccordionGroup>
+
+## Flexbox
+
+<CardGroup cols={2}>
+  <Card title="FlexLayout" icon="flex" href="https://github.com/layoutBox/FlexLayout">
+    Gently wraps Facebook's Yoga flexbox engine with concise, intuitive, chainable syntax
+  </Card>
+  <Card title="YogaKit" icon="yoga" href="https://github.com/facebook/yoga/tree/master/YogaKit">
+    Facebook's powerful Yoga layout engine (Flexbox) for iOS
+  </Card>
+</CardGroup>
+
+```swift FlexLayout
+import FlexLayout
+
+rootFlexContainer.flex.direction(.column).padding(12).define { flex in
+    flex.addItem(imageView).width(100%).aspectRatio(1.5)
+    flex.addItem().direction(.row).define { flex in
+        flex.addItem(nameLabel).grow(1)
+        flex.addItem(priceLabel)
+    }
+}
+```
+
+## Manual & frame-based layout
+
+For performance-critical views (like cells with many subviews), manual layout is sometimes the right choice:
+
+<AccordionGroup>
+  <Accordion title="Manual layout libraries">
+    | Library | Description |
+    |---------|-------------|
+    | [PinLayout](https://github.com/layoutBox/PinLayout) | Fast layout without auto layout — blazing fast and full control |
+    | [ManualLayout](https://github.com/isair/ManualLayout) | Easy and flexible manual layout for iOS and tvOS |
+    | [Façade](https://github.com/mamaral/Facade) | Programmatic view layout — an autolayout alternative |
+    | [FlightLayout](https://github.com/AntonTheDev/FlightLayout) | Balanced medium between manual and auto layout |
+    | [SnapLayout](https://github.com/sp71/SnapLayout) | Concise Auto Layout API to chain programmatic constraints |
+  </Accordion>
+</AccordionGroup>
+
+## SwiftUI layout
+
+<CardGroup cols={2}>
+  <Card title="Grid" icon="table" href="https://github.com/exyte/Grid">
+    The most powerful Grid container missing from SwiftUI
+  </Card>
+  <Card title="ScalingHeaderScrollView" icon="arrows-up-down" href="https://github.com/exyte/ScalingHeaderScrollView">
+    Sticky header scroll view that shrinks as you scroll, written with SwiftUI
+  </Card>
+</CardGroup>
+
+<Tip>
+  For new projects targeting iOS 16+, prefer SwiftUI's native layout system (`Grid`, `ViewThatFits`, etc.) before reaching for third-party libraries. For UIKit projects, SnapKit or TinyConstraints are the community favorites.
+</Tip>

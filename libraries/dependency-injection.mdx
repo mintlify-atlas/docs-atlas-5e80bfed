@@ -1,0 +1,191 @@
+---
+title: 'Dependency injection'
+description: 'Dependency injection libraries for iOS covering container-based DI, compile-time safe DI, lightweight protocol-based approaches, and Objective-C frameworks.'
+keywords: ['dependency injection', 'DI', 'Swinject', 'Needle', 'Typhoon', 'SafeDI', 'Weaver', 'iOS', 'Swift']
+---
+
+Dependency injection (DI) is the practice of providing an object's dependencies from outside rather than creating them internally. This decouples components, makes code testable, and makes dependencies explicit.
+
+## Why use DI in iOS apps
+
+<AccordionGroup>
+  <Accordion title="Testability">
+    When your classes receive their dependencies through initializers or properties, you can substitute real implementations with mocks or fakes in tests without modifying production code.
+  </Accordion>
+  <Accordion title="Decoupling">
+    Classes depend on abstractions (protocols) rather than concrete types. Swapping implementations — a local cache for a remote one, for example — requires no changes to the consumers.
+  </Accordion>
+  <Accordion title="Explicit dependencies">
+    Reading an initializer immediately tells you what a component needs to function. Hidden global state and singletons disappear from your graph.
+  </Accordion>
+  <Accordion title="Parallel development">
+    Large teams can work on different components simultaneously. As long as the protocol contract is agreed on, implementations can be developed independently.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Choosing an approach
+
+| Approach | Best for |
+|---|---|
+| Container-based (Swinject) | Most apps; runtime flexibility, moderate safety |
+| Compile-time safe (Needle, SafeDI, Weaver) | Large teams; catches wiring errors at build time |
+| Lightweight / protocol-based | Small apps or specific injection points |
+| Objective-C frameworks (Typhoon, Alchemic) | Mixed ObjC/Swift or legacy codebases |
+
+---
+
+## Container-based DI
+
+Container-based frameworks maintain a registry of type-to-factory mappings. You register types at startup and resolve them anywhere in your app. The container handles lifetime management (singleton, transient, etc.).
+
+<CardGroup cols={2}>
+  <Card
+    title="Swinject"
+    icon="syringe"
+    href="https://github.com/Swinject/Swinject"
+  >
+    The most popular dependency injection framework for Swift. Clean API, supports circular dependency resolution and container hierarchies.
+  </Card>
+  <Card
+    title="Kraken"
+    icon="fish"
+    href="https://github.com/sabirvirtuoso/Kraken"
+  >
+    A dependency injection container for Swift with easy-to-use syntax.
+  </Card>
+  <Card
+    title="DITranquillity"
+    icon="droplet"
+    href="https://github.com/ivlevAstef/DITranquillity"
+  >
+    Dependency injection framework for iOS applications written in clean Swift.
+  </Card>
+  <Card
+    title="Guise"
+    icon="scale-balanced"
+    href="https://github.com/prosumma/Guise"
+  >
+    Elegant, flexible, type-safe dependency resolution framework for Swift.
+  </Card>
+</CardGroup>
+
+```swift Swinject example
+import Swinject
+
+let container = Container()
+container.register(AnimalType.self) { _ in Cat(name: "Mimi") }
+container.register(PersonType.self) { r in
+    PetOwner(pet: r.resolve(AnimalType.self)!)
+}
+
+let owner = container.resolve(PersonType.self)!
+```
+
+**Supporting libraries**
+
+- [ViperServices](https://github.com/ladeiko/ViperServices) — DI container for iOS where each service can have boot and shutdown code; designed for VIPER apps.
+- [Reliant](https://github.com/appfoundry/Reliant) — Nonintrusive Objective-C dependency injection.
+
+---
+
+## Compile-time safe DI
+
+Compile-time DI frameworks generate the wiring code at build time. Misconfigured dependencies become compile errors rather than runtime crashes, which is invaluable in large apps where the object graph is complex.
+
+<CardGroup cols={2}>
+  <Card
+    title="Needle"
+    icon="needle"
+    href="https://github.com/uber/needle"
+  >
+    Uber's compile-time safe Swift DI framework. Generates boilerplate from component declarations. Scales to very large codebases.
+  </Card>
+  <Card
+    title="SafeDI"
+    icon="shield-check"
+    href="https://github.com/dfed/safedi"
+  >
+    Compile-time safe dependency injection in Swift 6. Uses macros to generate the wiring graph.
+  </Card>
+  <Card
+    title="Weaver"
+    icon="weave"
+    href="https://github.com/scribd/Weaver"
+  >
+    Declarative, easy-to-use and safe DI framework for Swift. Uses source annotations and code generation.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Compile-time DI requires a code generation step in your build pipeline. This adds build-time complexity but eliminates an entire class of runtime crashes caused by missing or incorrect registrations.
+</Tip>
+
+---
+
+## Lightweight / protocol-based DI
+
+For smaller apps or isolated injection points, you may not need a container at all. These libraries provide targeted, minimal DI utilities.
+
+<CardGroup cols={2}>
+  <Card
+    title="Locatable"
+    icon="location-dot"
+    href="https://github.com/vincent-pradeilles/locatable"
+  >
+    Micro-framework that leverages Property Wrappers to implement the Service Locator pattern.
+  </Card>
+  <Card
+    title="Perform"
+    icon="play"
+    href="https://github.com/thoughtbot/Perform"
+  >
+    Easy dependency injection for storyboard segues from Thoughtbot.
+  </Card>
+  <Card
+    title="StoryboardBuilder"
+    icon="shapes"
+    href="https://github.com/hiro-nagami/StoryboardBuilder"
+  >
+    Simple dependency injection for generating views from storyboards.
+  </Card>
+  <Card
+    title="Pilgrim"
+    icon="person-walking"
+    href="https://github.com/appsquickly/pilgrim"
+  >
+    Powerful DI for Swift, successor to Typhoon. Clean, Swift-first API.
+  </Card>
+</CardGroup>
+
+<Note>
+  The Service Locator pattern (used by Locatable) is related to DI but differs in that components pull their dependencies from a global registry rather than receiving them through their interface. It reduces boilerplate but makes dependencies less explicit.
+</Note>
+
+---
+
+## Objective-C DI frameworks
+
+These frameworks target Objective-C codebases or mixed ObjC/Swift apps. They provide mature, feature-rich DI containers with XML or annotation-based configuration.
+
+<CardGroup cols={2}>
+  <Card
+    title="Typhoon"
+    icon="tornado"
+    href="https://github.com/appsquickly/Typhoon"
+  >
+    Powerful dependency injection for Objective-C. Feature-rich with support for circular references, modular configuration, and test integration.
+  </Card>
+  <Card
+    title="Alchemic"
+    icon="flask-vial"
+    href="https://github.com/drekka/Alchemic"
+  >
+    Advanced yet simple DI framework for Objective-C, with annotation-based wiring and automatic injection.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Typhoon and Alchemic are designed primarily for Objective-C. If you are starting a new Swift project, prefer Swinject, Needle, or SafeDI instead.
+</Warning>

@@ -1,0 +1,159 @@
+---
+title: 'Debugging'
+description: 'Libraries for in-app debugging, network inspection, logging, and crash reporting on iOS.'
+keywords: ['debugging', 'logging', 'analytics', 'crash reporting', 'network debugging', 'FLEX', 'Sentry']
+---
+
+Debugging iOS apps effectively requires the right tools at each layer — from inspecting live UI state to capturing network traffic to tracking crashes in production. This page covers the most useful libraries across all four categories.
+
+## Popular tools
+
+<CardGroup cols={2}>
+  <Card
+    title="FLEX"
+    icon="magnifying-glass"
+    href="https://github.com/Flipboard/FLEX"
+  >
+    In-app debugging and exploration tool for iOS. Inspect views, network calls, defaults, and more at runtime.
+  </Card>
+  <Card
+    title="Netfox"
+    icon="network-wired"
+    href="https://github.com/kasketis/netfox"
+  >
+    Lightweight, one-line-setup network debugging library for iOS and macOS.
+  </Card>
+  <Card
+    title="Wormholy"
+    icon="wand-magic-sparkles"
+    href="https://github.com/pmusolino/Wormholy"
+  >
+    iOS network debugging that works like magic — shake to reveal all network requests.
+  </Card>
+  <Card
+    title="Sentry"
+    icon="bug"
+    href="https://sentry.io/"
+  >
+    Self-hosted and cloud-based error monitoring. Helps teams discover, triage, and prioritize errors in real-time.
+  </Card>
+  <Card
+    title="Instabug"
+    icon="comment-dots"
+    href="https://instabug.com"
+  >
+    In-app feedback, bug and crash reporting with user steps, video recordings, network request logging and more.
+  </Card>
+  <Card
+    title="Bugsnag"
+    icon="triangle-exclamation"
+    href="https://www.bugsnag.com/platforms/ios-crash-reporting"
+  >
+    Error tracking with a free tier. Reports include device, release, user data, and arbitrary custom data.
+  </Card>
+</CardGroup>
+
+---
+
+## In-app debug panels
+
+These tools provide floating debug overlays or dedicated panels you can activate at runtime without modifying your app's production UI.
+
+- [FLEX](https://github.com/Flipboard/FLEX) — Full-featured in-app debugging and exploration tool. Inspect views, network requests, UserDefaults, filesystem, and more.
+- [DBDebugToolkit](https://github.com/dbukowski/DBDebugToolkit) — Set of easy-to-use debugging tools for iOS developers and QA engineers.
+- [DebugSwift](https://github.com/DebugSwift/DebugSwift) — A comprehensive toolkit designed to simplify and enhance the debugging process for iOS applications.
+- [Hyperion](https://github.com/willowtreeapps/Hyperion-iOS) — In-app design review tool to inspect measurements, attributes, and animations.
+- [DoraemonKit](https://github.com/didi/DoraemonKit) — A full-featured iOS app development assistant with 30+ built-in tools.
+- [Droar](https://github.com/myriadmobile/Droar) — Modular, single-line installation debugging window.
+- [Scyther](https://github.com/bstillitano/Scyther) — Full-featured in-app debugging menu with network logging, layout inspection, location spoofing, and console logging.
+- [Alpha](https://github.com/Legoless/Alpha) — Next generation debugging framework for iOS.
+- [GodEye](https://github.com/zixun/GodEye) — Automatically display Log, Crash, Network, ANR, Leak, CPU, RAM, FPS, and more with one line of code.
+- [MTHawkeye](https://github.com/meitu/MTHawkeye) — Profiling and debugging assist tools including UITimeProfiler, Memory Allocations, ObjC Object Sniffer, and Network Waterfall.
+- [Dotzu](https://github.com/remirobert/Dotzu) — iOS app debugger while using the app. Covers crash reports, logs, and network.
+- [AEConsole](https://github.com/tadija/AEConsole) — Customizable Console UI overlay with a debug log on top of your iOS app.
+- [LayoutInspector](https://github.com/isavynskyi/LayoutInspector) — Debug app layouts directly on iOS device: inspect layers in 3D and debug view attributes.
+
+<Tip>
+Add FLEX only to debug builds by wrapping its invocation in a `#if DEBUG` block. Never ship debugging panels to the App Store.
+</Tip>
+
+```swift FLEX integration
+// Add FLEX to your AppDelegate for debug builds
+#if DEBUG
+import FLEX
+FLEXManager.shared.showExplorer()
+#endif
+```
+
+---
+
+## Network debugging
+
+Monitor, intercept, and replay HTTP/HTTPS traffic from within your app or alongside a proxy tool.
+
+- [Netfox](https://github.com/kasketis/netfox) — Lightweight, one-line-setup iOS/macOS network debugging library. Shows all requests and responses.
+- [Wormholy](https://github.com/pmusolino/Wormholy) — Shake the device to open a built-in network inspector — no setup beyond one line.
+- [Atlantis](https://github.com/ProxymanApp/atlantis) — Intercepts HTTP/HTTPS traffic from your iOS app without manual proxy or certificate configuration. Works with Proxyman.
+- [NetShears](https://github.com/divar-ir/NetShears.git) — Intercept and monitor HTTP/HTTPS requests and responses, including gRPC calls.
+- [NetworkEye](https://github.com/coderyi/NetworkEye) — iOS network debug library that monitors HTTP requests and displays request details.
+- [PonyDebugger](https://github.com/square/PonyDebugger) — Remote network and data debugging for native iOS apps using Chrome Developer Tools.
+- [Xniffer](https://github.com/xmartlabs/Xniffer) — Swift network profiler built on top of URLSession.
+- [AppSpector](https://appspector.com) — Remote iOS and Android debugging service. Debug networking, logs, CoreData, SQLite, NSNotificationCenter, and mock geo location.
+- [Httper-iOS](https://github.com/MuShare/Httper-iOS) — App for developers to test REST API endpoints.
+- [chisel](https://github.com/facebook/chisel) — Collection of LLDB commands to assist debugging iOS apps, including network and view inspection.
+- [Woodpecker](http://www.woodpeck.cn) — View sandbox files, UserDefaults, and network requests from Mac.
+
+---
+
+## Logging libraries
+
+Structured, configurable logging frameworks for development and production use.
+
+- [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) — Fast, simple yet powerful and flexible logging framework for Mac and iOS. The de facto standard.
+- [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver) — Convenient logging during development and release. Supports console, file, and cloud destinations.
+- [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) — Debug log framework for Swift. Logs to console and optionally file, with date, function name, filename, and line number.
+- [Willow](https://github.com/Nike-Inc/Willow) — Powerful, lightweight logging library from Nike, written in Swift.
+- [Pulse](https://github.com/kean/Pulse) — Powerful logging system for Apple Platforms built with SwiftUI. Includes a native log viewer.
+- [CleanroomLogger](https://github.com/emaloney/CleanroomLogger) — Configurable and extensible Swift-based logging API that is simple, lightweight, and performant.
+- [NSLogger](https://github.com/fpillet/NSLogger) — High-performance logging utility displaying traces from apps running on macOS, iOS, and Android.
+- [QorumLogs](https://github.com/goktugyil/QorumLogs) — Swift Logging Utility for Xcode and Google Docs integration.
+- [Rainbow](https://github.com/onevcat/Rainbow) — Delightful console output for Swift developers with color support.
+- [JustLog](https://github.com/justeat/JustLog) — Console, file, and remote Logstash logging via TCP socket.
+- [Bugfender](https://github.com/bugfender/BugfenderSDK-iOS) — Cloud storage for app logs. Track user behaviour to find problems in mobile apps.
+- [TinyConsole](https://github.com/Cosmo/TinyConsole) — A tiny log console to display information while using your iOS app.
+- [Watchdog](https://github.com/wojteklu/Watchdog) — Class for logging excessive blocking on the main thread.
+- [Reqres](https://github.com/AckeeCZ/Reqres) — Network request and response body logger with Alamofire support.
+- [AELog](https://github.com/tadija/AELog) — Simple, lightweight, and flexible debug logging framework written in Swift.
+- [Diagnostics](https://github.com/WeTransfer/Diagnostics) — Allow users to easily share diagnostics with your support team to improve bug fixing flow.
+- [Twitter Logging Service](https://github.com/twitter/ios-twitter-logging-service) — Robust and performant logging framework for iOS clients, from Twitter.
+- [Lighty](https://github.com/abdullahselek/Lighty) — Easy to use and lightweight logger for iOS, macOS, tvOS, watchOS, and Linux.
+- [SwiftTrace](https://github.com/johnno1962/SwiftTrace) — Trace Swift and Objective-C method invocations.
+- [OkLog](https://github.com/diegotl/OkLog-Swift) — A network logger for iOS and macOS projects.
+- [LxDBAnything](https://github.com/DeveloperLx/LxDBAnything) — Automate box any value. Print log without format control symbols.
+- [Gedatsu](https://github.com/bannzai/gedatsu) — Provides readable format for AutoLayout error console logs.
+
+---
+
+## Analytics and crash reporting
+
+Platforms for collecting telemetry, user analytics, and crash data in production.
+
+- [Sentry](https://sentry.io/) — Self-hosted and cloud-based error monitoring. Helps teams discover, triage, and prioritize errors in real-time.
+- [Bugsnag](https://www.bugsnag.com/platforms/ios-crash-reporting) — Error tracking with a free tier. Error reports include device, release, user data, and allow arbitrary custom data.
+- [Instabug](https://instabug.com) — In-app feedback, bug and crash reporting with user steps, video recordings, screen annotation, and network request logging.
+- [Firebase Crashlytics](https://firebase.google.com/products/crashlytics/) — Crash reporting and beta testing service from Google Firebase.
+- [Shake](https://www.shakebugs.com/) — In-app feedback and bug reporting with detailed device data, repro steps, video recording, and network requests.
+- [Countly](https://count.ly) — Open source, mobile and web analytics with crash reports and push notifications for iOS and Android.
+- [Embrace](http://embrace.io) — Mobile observability built on OpenTelemetry to provide user-focused, reliable apps.
+- [Emerge Tools](https://www.emergetools.com) — Prevent app size and performance regressions on every pull request.
+- [Aptabase](https://aptabase.com/for-swift) — Open Source, privacy-first, and simple analytics for Swift apps.
+- [Matomo](https://github.com/matomo-org/matomo-sdk-ios) — iOS, tvOS, and macOS SDK for sending app analytics to a self-hosted Matomo server.
+- [Segment](https://github.com/segmentio/analytics-ios) — The hassle-free way to integrate analytics into any iOS application.
+- [Mixpanel](https://mixpanel.com/) — Advanced analytics platform.
+- [Answers by Fabric](https://get.fabric.io) — Real-time insight into people's experience in your app.
+- [devtodev](https://www.devtodev.com/) — Comprehensive analytics service that improves your project and saves development time.
+- [Bugsee](https://www.bugsee.com) — In-app bug and crash reporting with video, logs, network traffic, and traces.
+
+<Note>
+For crash reporting, Sentry and Firebase Crashlytics are the most widely adopted. Sentry supports self-hosting if data residency is a concern.
+</Note>

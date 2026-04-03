@@ -1,0 +1,137 @@
+---
+title: 'Deployment and distribution'
+description: 'CI/CD platforms, App Store tools, beta distribution services, and automation tools for shipping iOS apps.'
+keywords: ['deployment', 'distribution', 'ci/cd', 'fastlane', 'app store', 'testflight', 'bitrise', 'codemagic']
+---
+
+A curated collection of tools and platforms for building, testing, and distributing iOS apps — from continuous integration pipelines to App Store submission automation.
+
+## CI/CD platforms
+
+<CardGroup cols={2}>
+  <Card title="Bitrise" icon="activity" href="https://www.bitrise.io">
+    Mobile Continuous Integration and Delivery with dozens of integrations to build, test, deploy and collaborate. Purpose-built for mobile.
+  </Card>
+  <Card title="Codemagic" icon="wand" href="https://codemagic.io">
+    Build, test and deliver iOS apps up to 20% faster with Codemagic CI/CD. Supports Flutter, React Native, and native iOS.
+  </Card>
+  <Card title="Semaphore" icon="git-branch" href="https://semaphoreci.com/product/ios">
+    CI/CD service that makes it easy to build, test and deploy applications for any Apple device. iOS support is fully integrated in Semaphore 2.0.
+  </Card>
+  <Card title="AppCenter" icon="cloud" href="https://appcenter.ms">
+    Continuously build, test, release, and monitor apps for every platform. Microsoft's all-in-one DevOps solution for mobile.
+  </Card>
+  <Card title="Appcircle.io" icon="circle" href="https://appcircle.io">
+    Enterprise-grade mobile DevOps platform that automates the build, test, and publish store of mobile apps for faster, efficient release cycles.
+  </Card>
+  <Card title="buddybuild" icon="users" href="https://www.buddybuild.com/">
+    A mobile iteration platform — build, deploy, and collaborate. Focused on team workflows.
+  </Card>
+</CardGroup>
+
+## App Store tools
+
+Tools for screenshots, metadata management, and App Store submission.
+
+<CardGroup cols={2}>
+  <Card title="snapshot" icon="camera" href="https://github.com/fastlane/fastlane/tree/master/snapshot">
+    Automate taking localized screenshots of your iOS app on every device. Part of the fastlane suite.
+  </Card>
+  <Card title="deliver" icon="upload" href="https://github.com/fastlane/fastlane/tree/master/deliver">
+    Upload screenshots, metadata and your app to the App Store using a single command.
+  </Card>
+  <Card title="ScreenshotFramer" icon="frame" href="https://github.com/IdeasOnCanvas/ScreenshotFramer">
+    Easily create nice-looking and localized App Store images by placing screenshots into device frames.
+  </Card>
+  <Card title="AppLaunchpad" icon="image" href="https://theapplaunchpad.com/">
+    Free App Store screenshot builder. Design beautiful screenshots without design skills.
+  </Card>
+</CardGroup>
+
+- [ios-uploader](https://github.com/simonnilsson/ios-uploader) — Easy to use, cross-platform tool to upload iOS apps to App Store Connect.
+- [LaunchKit](https://github.com/LaunchKit/LaunchKit) — A set of web-based tools for mobile app developers (open source).
+
+## Beta distribution
+
+<CardGroup cols={2}>
+  <Card title="TestFlight Beta Testing" icon="flask" href="https://developer.apple.com/testflight/">
+    Apple's official beta testing service hosted on iTunes Connect. Supports up to 10,000 external testers.
+  </Card>
+  <Card title="HockeyKit" icon="hockey-stick" href="https://github.com/bitstadium/HockeyKit">
+    A software update kit that predates TestFlight's widespread adoption. Useful for enterprise distribution.
+  </Card>
+  <Card title="boarding" icon="users" href="https://github.com/fastlane/boarding">
+    Instantly create a simple signup page for TestFlight beta testers. Built by the fastlane team.
+  </Card>
+  <Card title="Crashlytics" icon="bug" href="https://firebase.google.com/products/crashlytics/">
+    A crash reporting and beta testing service now part of Firebase. Industry-standard for crash tracking.
+  </Card>
+</CardGroup>
+
+Additional distribution tools:
+
+- [Instabug](https://instabug.com) — In-app feedback, bug and crash reporting. Fix bugs faster through user-steps, video recordings, screen annotations, and network request logging.
+- [Runway](https://runway.team) — Easier mobile releases for teams. Integrates across version control, project management, CI, app stores, and crash reporting.
+- [Screenplay](https://screenplay.dev) — Instant rollbacks and canary deployments for iOS.
+- [Rollout.io](https://rollout.io/) — SDK to patch, fix bugs, modify and manipulate native apps in real-time.
+- [watchbuild](https://github.com/fastlane/watchbuild) — Get a notification once your iTunes Connect build is finished processing.
+- [Appfigurate](https://github.com/electricbolt/appfiguratesdk) — Secure runtime configuration for iOS and watchOS apps and extensions.
+
+## Fastlane and automation tools
+
+[fastlane](https://github.com/fastlane/fastlane) is the most widely used iOS deployment automation tool. It connects all iOS deployment tools into one streamlined workflow.
+
+```ruby Fastfile example
+lane :beta do
+  increment_build_number
+  build_app(scheme: "MyApp")
+  upload_to_testflight
+  slack(message: "Successfully distributed a new beta build")
+end
+
+lane :release do
+  capture_screenshots
+  build_app(scheme: "MyApp")
+  upload_to_app_store
+end
+```
+
+<CardGroup cols={2}>
+  <Card title="fastlane" icon="zap" href="https://github.com/fastlane/fastlane">
+    Connect all iOS deployment tools into one streamlined workflow. The de-facto standard for iOS CI/CD automation.
+  </Card>
+  <Card title="fastlane-plugin-appicon" icon="image" href="https://github.com/fastlane-community/fastlane-plugin-appicon">
+    Generate required icon sizes and iconset from a master application icon as a fastlane plugin.
+  </Card>
+</CardGroup>
+
+fastlane includes many built-in actions and supports hundreds of community plugins:
+
+- **snapshot** — Automated localized screenshots
+- **deliver** — Upload metadata and binaries to the App Store
+- **pem** — Automatically generate and renew push notification profiles
+- **gym** (build_app) — Build and sign your iOS app
+
+## Project setup and scaffolding
+
+<CardGroup cols={2}>
+  <Card title="Tuist" icon="folder" href="https://github.com/tuist/tuist">
+    A tool to create, maintain, and interact with Xcode projects at scale. Describes projects in Swift manifests.
+  </Card>
+  <Card title="XcodeGen" icon="hammer" href="https://github.com/yonaskolb/XcodeGen">
+    Command line tool that generates your Xcode project from a spec file and your folder structure.
+  </Card>
+  <Card title="crafter" icon="wrench" href="https://github.com/krzysztofzablocki/crafter">
+    CLI that allows you to configure iOS project templates using a custom DSL syntax, simple to use and powerful.
+  </Card>
+  <Card title="SwiftPlate" icon="copy" href="https://github.com/JohnSundell/SwiftPlate">
+    Easily generate cross-platform Swift framework projects from the command line.
+  </Card>
+</CardGroup>
+
+- [liftoff](https://github.com/liftoffcli/liftoff) — Another CLI for creating iOS projects with sensible defaults.
+- [amaro](https://github.com/crushlovely/Amaro) — iOS boilerplate full of delights.
+- [SwiftKit](https://github.com/SvenTiigi/SwiftKit) — Start your next open-source Swift framework.
+- [swift5-module-template](https://github.com/fulldecent/swift5-module-template) — A starting point for any Swift 5 module intended for other people to include in their projects.
+- [xcproj](https://github.com/tuist/xcodeproj) — Read and update Xcode projects programmatically.
+- [Cookiecutter](https://github.com/RahulKatariya/SwiftFrameworkTemplate) — A template for new Swift iOS/tvOS/watchOS/macOS framework projects with Travis CI, CocoaPods, Carthage, and SwiftPM support.

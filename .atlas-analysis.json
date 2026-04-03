@@ -1,26 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Awesome iOS",
+  "projectType": "general",
+  "projectName": "Awesome iOS",
+  "projectDescription": "A curated list of awesome iOS ecosystem libraries, frameworks, tools, and resources for Swift and Objective-C development.",
   "theme": "palm",
-  "colors": {
-    "primary": "#ec3e39",
-    "light": "#74716e"
-  },
-  "logo": {
-    "light": "https://media.brand.dev/0d4d96c9-5c5b-4599-a519-87550b6c0390.png",
-    "dark": "https://media.brand.dev/0d4d96c9-5c5b-4599-a519-87550b6c0390.png"
-  },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/vsouza/awesome-ios"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/vsouza/awesome-ios"
-    }
-  },
+  "primaryColor": "#ec3e39",
+  "lightColor": "#74716e",
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -99,5 +84,29 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Comprehensive curated list of 1000+ iOS libraries and frameworks",
+    "Covers Swift and Objective-C ecosystems",
+    "Organized by category: UI, networking, data, architecture, hardware, and more",
+    "Includes learning resources: books, courses, tutorials, and podcasts",
+    "Covers ARKit, machine learning, Bluetooth, camera, and other platform capabilities",
+    "Tools for testing, debugging, code quality, CI/CD, and deployment",
+    "Community-maintained with contribution guidelines",
+    "Covers reactive programming, architecture patterns (MVVM, VIPER, TCA), and DI frameworks"
+  ],
+  "publicApiSurface": [
+    "Analytics & crash reporting libraries (Sentry, Bugsnag, Mixpanel)",
+    "App routing & deep linking (JLRoutes, URLNavigator, RxFlow)",
+    "Networking libraries (Alamofire, Moya, URLSession wrappers)",
+    "Database & persistence (Realm, CoreData wrappers, SQLite.swift, GRDB)",
+    "UI components (animations, collection views, table views, alerts)",
+    "Layout frameworks (SnapKit, PureLayout, FlexLayout, TinyConstraints)",
+    "Testing frameworks (Quick, Nimble, XCTest wrappers)",
+    "Authentication & OAuth (OAuthSwift, OAuth2)",
+    "ARKit & machine learning libraries",
+    "Bluetooth & hardware (CoreBluetooth wrappers, camera libraries)",
+    "Dependency injection (Swinject, Needle, Weaver)",
+    "Reactive programming (RxSwift, Combine wrappers, ReactiveSwift)"
+  ]
 }
